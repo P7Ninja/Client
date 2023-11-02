@@ -8,6 +8,13 @@ npm install
 npm run dev
 ```
 
+Necessary npm packages:
+```
+npm i react-pro-sidebar
+npm i react-router-dom
+```
+
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
