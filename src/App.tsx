@@ -10,8 +10,6 @@ import Health from './containers/Health/Health'
 import './App.scss'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       {/* <Login></Login> */}
@@ -75,6 +73,8 @@ function Login() {
           <label htmlFor="male">Mand</label>
           <input type='radio' name='gender' id='female' onClick={() => setGender("female")} required></input>
           <label htmlFor='female'>Kvinde</label>
+          <input type='radio' name='gender' id='other' onClick={() => setGender("other")} required></input>
+          <label htmlFor='female'>Andet</label>
           <button type='submit'>Opret bruger</button>
           <br/>
           <a onClick={() => setIsCreatingUser(false)}>Tilbage til login</a>
