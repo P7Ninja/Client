@@ -8,7 +8,7 @@ const _Sidebar = () => {
             <Sidebar>
                 <Menu className="menu">
                     <MenuItem className="menu-item" component={<Link to="/user"/>}>User</MenuItem>
-                    <MenuItem className="menu-item" component={<Link to="/meal_plans"/>}>Meal Plans</MenuItem>
+                    <MenuItem className="menu-item" component={<Link to="/mealplans"/>}>Meal Plans</MenuItem>
                     <MenuItem className="menu-item" component={<Link to="/inventory"/>}>Inventory</MenuItem>
                     <MenuItem className="menu-item" component={<Link to="/health"/>}>Health</MenuItem>  
                 </Menu>

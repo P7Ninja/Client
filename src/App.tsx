@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import Sidebar from './components/sidebar'
+import Sidebar from './components/Sidebar/sidebar'
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
-import User from './containers/User'
-import MealPlans from './containers/MealPlans'
-import Inventory from './containers/Inventory'
-import Health from './containers/Health'
+import User from './containers/User/User'
+import MealPlans from './containers/MealPlans/MealPlans'
+import Inventory from './containers/Inventory/Inventory'
+import Health from './containers/Health/Health'
 
 import './App.scss'
 
@@ -20,7 +20,7 @@ function App() {
         <div>
           <Routes>
             <Route path="user" element={<User />} />
-            <Route path="meal_plans" element={<MealPlans />} />
+            <Route path="mealplans" element={<MealPlans />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="health" element={<Health />} />
           </Routes>
