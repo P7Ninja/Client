@@ -1,0 +1,16 @@
+.personalInformation, button {
+    display: flex;
+    flex-direction: column;
+
+    // You can apply this to all form inputs, including buttons
+    input {
+        width: 100%;  // Take up full container width
+        margin-bottom: 10px;  // Add space between the elements
+        box-sizing: border-box; // Include padding and border in the element's total width and height
+    }
+
+    label {
+        display: block;  // Make label a block-level element
+        margin-bottom: 5px;  // Space between label and input
+    }
+}

@@ -1,12 +1,12 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
-import './sidebar.css'
+import './sidebar.scss';
 
 const _Sidebar = () => {
     return (
         <div>
             <Sidebar>
-                <Menu>
+                <Menu className="menu">
                     <MenuItem className="menu-item" component={<Link to="/user"/>}>User</MenuItem>
                     <MenuItem className="menu-item" component={<Link to="/meal_plans"/>}>Meal Plans</MenuItem>
                     <MenuItem className="menu-item" component={<Link to="/inventory"/>}>Inventory</MenuItem>

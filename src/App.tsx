@@ -7,7 +7,7 @@ import MealPlans from './containers/MealPlans'
 import Inventory from './containers/Inventory'
 import Health from './containers/Health'
 
-import './App.css'
+import './App.scss'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,9 +17,8 @@ function App() {
       {/* <Login></Login> */}
       <Router>
         <Sidebar />
-        <div className="container">
+        <div>
           <Routes>
-            {/* <Route path="/" element={<HomePage />}></Route> */}
             <Route path="user" element={<User />} />
             <Route path="meal_plans" element={<MealPlans />} />
             <Route path="inventory" element={<Inventory />} />

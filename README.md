@@ -12,6 +12,7 @@ Necessary npm packages:
 ```
 npm i react-pro-sidebar
 npm i react-router-dom
+npm i sass
 ```
 
 
