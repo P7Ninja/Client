@@ -1,15 +1,56 @@
-.personalInformation, button {
-    display: flex;
-    flex-direction: column;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 80vw;
+  max-height: calc(100vh - 20px);
+  overflow-y: auto;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
 
-    input {
-        width: 100%;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-    }
+.input-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
 
-    label {
-        display: block; 
-        margin-bottom: 5px;
-    }
+.input-row label,
+.input-row input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+
+input {
+  margin-right:30px;
+}
+
+.input-row label:last-child,
+.input-row input:last-child {
+  margin-right: 0;
+}
+
+
+/* Rest of your CSS remains unchanged */
+.form-container input[type='checkbox'] {
+  margin-right: 5px;
+}
+
+.form-container label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  display: block;
+}
+
+.submit {
+  margin-left: 20%; // todo: center properly
 }

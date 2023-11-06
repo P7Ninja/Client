@@ -11,7 +11,6 @@ const Inventory = () => {
         Quantity: 0,
     });
     
-    // Handle changes in text inputs
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = event.target;
         setFormData({
@@ -20,7 +19,6 @@ const Inventory = () => {
         });
     };
     
-    // Handle changes in number inputs
     const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormData({
@@ -37,23 +35,23 @@ const Inventory = () => {
 
     return <div>
         <form onSubmit={handleSubmit} className="formContainer">
-        Item
-        <input
-            type="text"
-            name="item"
-            value={formData.Item}
-            onChange={handleInputChange}
-            placeholder="Item"
-         />
-         Quantity
-        <input
-            type="number"
-            name="quantity"
-            value={formData.Quantity}
-            onChange={handleInputChange}
-            placeholder="Quantity"
-         />
-         <button type="submit">Add Item</button>
+            Item
+            <input
+                type="text"
+                name="Item"
+                value={formData.Item}
+                onChange={handleInputChange}
+                placeholder="Item123"
+            />
+            Quantity
+            <input
+                type="number"
+                name="Quantity"
+                value={formData.Quantity}
+                onChange={handleNumberChange}
+                placeholder="Quantity"
+            />
+            <button type="submit">Add Item</button>
         </form>
     </div>
 }

@@ -1,7 +1,10 @@
 import { useState } from 'react'
-import Sidebar from './components/Sidebar/sidebar'
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
+
+import Sidebar from './components/Sidebar/sidebar'
+import TopNavigationBar from './components/TopNavigationBar/topnavigationbar'
+
 import User from './containers/User/User'
 import MealPlans from './containers/MealPlans/MealPlans'
 import Inventory from './containers/Inventory/Inventory'
@@ -13,17 +16,18 @@ function App() {
   return (
     <>
       {/* <Login></Login> */}
-      <Router>
-        <Sidebar />
-        <div>
+      <TopNavigationBar />
+      <div className='content'>
+        <Router>
+          <Sidebar />
           <Routes>
-            <Route path="user" element={<User />} />
-            <Route path="mealplans" element={<MealPlans />} />
-            <Route path="inventory" element={<Inventory />} />
-            <Route path="health" element={<Health />} />
-          </Routes>
-        </div>
-      </Router>
+              <Route path="user" element={<User />} />
+              <Route path="mealplans" element={<MealPlans />} />
+              <Route path="inventory" element={<Inventory />} />
+              <Route path="health" element={<Health />} />
+            </Routes>
+        </Router>
+      </div>
     </>
   )
 }

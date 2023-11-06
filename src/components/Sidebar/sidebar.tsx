@@ -16,7 +16,7 @@ const _Sidebar = () => {
     };
 
     return (
-        <div>
+        <div className="sidebar">
             <Sidebar>
                 <Menu className="menu">
                     <MenuItem className="menu-item" style={isActive('/user') ? activeStyle : undefined} component={<Link to="/user"/>}>User</MenuItem>

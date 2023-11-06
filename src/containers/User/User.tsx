@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import './User.scss';
 
-// Define the shape of the form state
 type FormState = {
   name: string;
   password: string;
@@ -15,7 +14,6 @@ type FormState = {
 };
 
 const User = () => {
-  // Set up state for the form inputs
   const [formData, setFormData] = useState<FormState>({
     name: '',
     password: '',
@@ -28,7 +26,6 @@ const User = () => {
     carbs: 0,
   });
 
-  // Handle changes in text inputs
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
     setFormData({
@@ -37,7 +34,6 @@ const User = () => {
     });
   };
 
-  // Handle changes in number inputs
   const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({
@@ -46,7 +42,6 @@ const User = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(formData);
@@ -55,34 +50,38 @@ const User = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
-      <input className="personalInformation"
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleInputChange}
-        placeholder="Name"
-      />
-      <input className="personalInformation"
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleInputChange}
-        placeholder="Password"
-      />
-      <input className="personalInformation"
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleInputChange}
-        placeholder="Email"
-      />
-      <input className="personalInformation"
-        type="text"
-        name="city"
-        value={formData.city}
-        onChange={handleInputChange}
-        placeholder="City"
-      />
+      <div id="input-row">
+        <input className="personalInformation" id="name"
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          placeholder="Name"
+        />
+        <input className="personalInformation" id="password"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          placeholder="Password"
+        />
+      </div>
+      <div id="input-row">
+        <input className="personalInformation" id="email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Email"
+        />
+        <input className="personalInformation" id="city"
+          type="text"
+          name="city"
+          value={formData.city}
+          onChange={handleInputChange}
+          placeholder="City"
+        />
+      </div>
   
       <label>
         Use Food Waste Discounts:
@@ -99,7 +98,7 @@ const User = () => {
         type="text"
         name="calories"
         value={formData.calories}
-        onChange={handleNumberChange}
+        onChange={handleInputChange}
         placeholder="Calories"
       />
       Protein
@@ -107,15 +106,15 @@ const User = () => {
         type="text"
         name="protein"
         value={formData.protein}
-        onChange={handleNumberChange}
+        onChange={handleInputChange}
         placeholder="Protein (g)"
       />
       Carbohydrates
       <input
-        type="number"
+        type="text"
         name="carbs"
         value={formData.carbs}
-        onChange={handleNumberChange}
+        onChange={handleInputChange}
         placeholder="Carbs (g)"
       />
       Fat
@@ -123,10 +122,10 @@ const User = () => {
         type="text"
         name="fat"
         value={formData.fat}
-        onChange={handleNumberChange}
+        onChange={handleInputChange}
         placeholder="Fat (g)"
       />
-      <button type="submit">Submit</button>
+      <button type="submit" className="submit">Submit</button>
     </form>
   );
 };

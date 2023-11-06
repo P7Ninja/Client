@@ -1,5 +1,5 @@
 const MealPlans = () => {
-    return <div>
+    return <div className="container">
         <button id="generateMealPlan">Generate meal plan</button>
     </div>
 }
