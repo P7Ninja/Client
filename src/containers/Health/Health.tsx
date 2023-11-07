@@ -36,7 +36,7 @@ const Health = () => {
 
     return <div>
         <form onSubmit={handleSubmit} className="formContainer">
-        Weight
+        <label htmlFor="Weight">Weight</label>
         <input
             type="text"
             name="Weight"
@@ -44,7 +44,7 @@ const Health = () => {
             onChange={handleInputChange}
             placeholder="kg"
         />
-        Date
+        <label htmlFor="Date">Date</label>
         <input
             type="date"
             name="Date"

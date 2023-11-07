@@ -93,38 +93,40 @@ const User = () => {
         />
         <br/>
       </label>
-      Calories
-      <input
-        type="text"
-        name="calories"
-        value={formData.calories}
-        onChange={handleInputChange}
-        placeholder="Calories"
-      />
-      Protein
-      <input
-        type="text"
-        name="protein"
-        value={formData.protein}
-        onChange={handleInputChange}
-        placeholder="Protein (g)"
-      />
-      Carbohydrates
-      <input
-        type="text"
-        name="carbs"
-        value={formData.carbs}
-        onChange={handleInputChange}
-        placeholder="Carbs (g)"
-      />
-      Fat
-      <input
-        type="text"
-        name="fat"
-        value={formData.fat}
-        onChange={handleInputChange}
-        placeholder="Fat (g)"
-      />
+      <div id="nutritionInformation">
+        Calories
+        <input
+          type="text"
+          name="calories"
+          value={formData.calories}
+          onChange={handleInputChange}
+          placeholder="Calories"
+        />
+        Protein
+        <input
+          type="text"
+          name="protein"
+          value={formData.protein}
+          onChange={handleInputChange}
+          placeholder="Protein (g)"
+        />
+        Carbohydrates
+        <input
+          type="text"
+          name="carbs"
+          value={formData.carbs}
+          onChange={handleInputChange}
+          placeholder="Carbs (g)"
+        />
+        Fat
+        <input
+          type="text"
+          name="fat"
+          value={formData.fat}
+          onChange={handleInputChange}
+          placeholder="Fat (g)"
+        />
+      </div>
       <button type="submit" className="submit">Submit</button>
     </form>
   );

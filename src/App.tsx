@@ -16,18 +16,18 @@ function App() {
   return (
     <>
       {/* <Login></Login> */}
-      <TopNavigationBar />
-      <div className='content'>
-        <Router>
+      <Router>
+        <TopNavigationBar />
+        <div className="content">
           <Sidebar />
           <Routes>
-              <Route path="user" element={<User />} />
-              <Route path="mealplans" element={<MealPlans />} />
-              <Route path="inventory" element={<Inventory />} />
-              <Route path="health" element={<Health />} />
-            </Routes>
-        </Router>
-      </div>
+            <Route path="user" element={<User />} />
+            <Route path="mealplans" element={<MealPlans />} />
+            <Route path="inventory" element={<Inventory />} />
+            <Route path="health" element={<Health />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   )
 }

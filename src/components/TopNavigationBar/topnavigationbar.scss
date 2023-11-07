@@ -2,8 +2,9 @@
     position: absolute; 
     overflow: hidden;
     background-color: rgba(249, 249, 249, 0.7019607843);
-    width: 100%; 
+    width: 100vh; 
     z-index: 100; 
+    margin-left: 250px;
 }
 
 .topnav a {
