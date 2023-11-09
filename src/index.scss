@@ -30,17 +30,16 @@ input[type="radio"] {
 
 a {
   font-weight: 500;
-  color: green;
+  color: white;
   text-decoration: inherit;
   cursor: pointer;
 }
 a:hover {
-  color: rgb(0, 105, 0);
+  background-color: #04AA6D;
 }
 
 form {
   padding: 20px 75px;
-  background-color: #1e1e1e;
   border-radius: 30px;
 }
 
@@ -95,5 +94,6 @@ button:focus-visible {
   form {
     background-color: #f9f9f9;
   }
+
 } 
 

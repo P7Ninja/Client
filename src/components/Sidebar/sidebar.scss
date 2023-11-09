@@ -2,12 +2,17 @@ body {
     float: left;
 }
 
-
 .menu {
     height: calc(100vh - 21px);
-    background-color: #F9F9F9B3;
+    background-color: rgb(60, 57, 57);
 }
 
 .menu-item {
     margin: 5px 0; 
 }
+
+@media (prefers-color-scheme: light) {
+    .menu {
+        background-color: #F9F9F9B3;
+    }
+} 

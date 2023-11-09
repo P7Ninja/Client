@@ -6,6 +6,8 @@ const _Sidebar = () => {
     const activeStyle = {
         color: 'white',
         backgroundColor: '#57d570',
+        borderRadius: '8px',
+        fontWeight: 'bold',
     };
 
     const location = useLocation(); // Hook to get the current location
@@ -18,7 +20,20 @@ const _Sidebar = () => {
     return (
         <div className="sidebar">
             <Sidebar>
-                <Menu className="menu">
+                <Menu className="menu" 
+                    menuItemStyles={{
+                        button: () => {
+                            return {
+                                "&:hover": {
+                                    backgroundColor: "#04AA6D",
+                                    color: "white !important",
+                                    borderRadius: "8px !important",
+                                    fontWeight: "bold !important"
+                                }
+                            }
+                        }
+                    }}    
+                >
                     <MenuItem className="menu-item" style={isActive('/user') ? activeStyle : undefined} component={<Link to="/user"/>}>User</MenuItem>
                     <MenuItem className="menu-item" style={isActive('/mealplans') ? activeStyle : undefined} component={<Link to="/mealplans"/>}>Meal Plans</MenuItem>
                     <MenuItem className="menu-item" style={isActive('/inventory') ? activeStyle : undefined} component={<Link to="/inventory"/>}>Inventory</MenuItem>
