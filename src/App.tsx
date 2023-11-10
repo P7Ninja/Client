@@ -4,14 +4,12 @@ import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
 import User from './containers/User/User'
 import MealPlans from './containers/MealPlans/MealPlans'
-import Inventory from './containers/Inventory/Inventory'
 import Health from './containers/Health/Health'
+import Inventory from './containers/Inventory/Inventory';
 
 import './App.scss'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       {/* <Login></Login> */}
@@ -43,6 +41,7 @@ function Login() {
   if (!isCreatingUser) {
     return (
       <>
+        <p>{gender}</p>
         <form onSubmit={e => e.preventDefault()}>
           <h1>Log ind</h1>
           <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Brugernavn'required/>

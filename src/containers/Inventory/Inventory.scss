@@ -1,0 +1,92 @@
+body {
+    color: rgb(25, 25, 25);
+    background-color: rgb(247, 247, 247);
+}
+
+.inv-selector {
+    cursor: default;
+    border-radius: 12px;
+    padding: 0 15px;
+    margin-top: 20px;
+    color: rgb(33, 33, 33);
+    background-color: #0f0f0f0f;
+}
+
+.selected {
+    background-color: #0f0f0f31;
+}
+
+.form-container {
+    max-width: 500px;
+}
+.form-container select {
+    max-width: 200px;
+}
+.form-container label {
+    display: block;
+    width: fit-content;
+}
+
+input,
+select {
+    margin: 5px 0;
+    padding: 5px 15px;
+    border-radius: 12px;
+    outline: none;
+    color: #141414;
+    border: 1px solid rgb(33, 33, 33);
+    box-shadow: 0 0 black;
+    background-color: #fff;
+}
+
+input:focus,
+select:focus {
+    box-shadow: 0 3px black;
+}
+
+button {
+    color: rgb(33, 33, 33);
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 12px;
+    box-shadow: 0 0 black;
+    background-color: transparent;
+}
+
+button:hover {
+    box-shadow: 0 3px black;
+}
+
+.secondary-btn {
+    color: rgb(33, 33, 33);
+    background-color: #0f0f0f0f;
+    border: none;
+    box-shadow: none;
+}
+
+.secondary-btn:hover {
+    box-shadow: none;
+    border: none;
+    background-color: #0f0f0f31;
+}
+
+.delete-btn-container:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn {
+    padding: 5px 10px;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(16, 16, 16, 0.1);
+}
+    .item p {
+        margin: 0;
+    }
+    .item:last-child {
+        border-bottom: none;
+    }

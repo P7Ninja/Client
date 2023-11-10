@@ -1,20 +1,42 @@
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './sidebar.scss';
+import { useState } from 'react';
 
 const _Sidebar = () => {
+    const [showMenu, setShowMenu] = useState(false);
+    const pages = [["/user", "User"],
+                   ["/mealplans", "Meal Plans"],
+                   ["/inventory", "Inventory"],
+                   ["/health", "Health"]];
     return (
-        <div>
-            <Sidebar>
-                <Menu className="menu">
-                    <MenuItem className="menu-item" component={<Link to="/user"/>}>User</MenuItem>
-                    <MenuItem className="menu-item" component={<Link to="/mealplans"/>}>Meal Plans</MenuItem>
-                    <MenuItem className="menu-item" component={<Link to="/inventory"/>}>Inventory</MenuItem>
-                    <MenuItem className="menu-item" component={<Link to="/health"/>}>Health</MenuItem>  
-                </Menu>
-            </Sidebar>
+        <div style={{height: "100wh"}}>
+            <div className='sidebar'>
+                <div className='stuff'>
+                    <div className='logo'>
+                        <span>🥬</span>
+                        <span>App Name</span>
+                    </div>
+                    <button onClick={() => setShowMenu(!showMenu)} className={showMenu? "switch rotated" : "switch"}><div/><div/><div/></button>
+                </div>
+                <div className={showMenu ? "menu" : "menu hide"}>
+                    {pages.map(page => {
+                        return <Item hideMenu={() => setShowMenu(false)} link={page[0]} name={page[1]}/>
+                    })}
+                </div>
+            </div>
         </div>
     );
 };
+
+interface ItemProps {
+    link: string,
+    name: string,
+    hideMenu: () => void,
+}
+const Item = (props: ItemProps) => {
+    const loc = useLocation();
+    const isActive = loc.pathname.includes(props.link);
+    return <div className={isActive ? "menu-item item-active" : "menu-item"}><Link to={props.link} onClick={props.hideMenu}>{props.name}</Link></div>
+}
 
 export default _Sidebar;

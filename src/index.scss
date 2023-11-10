@@ -100,7 +100,15 @@
 //     background-color: #f9f9f9;
 //   }
 // } 
-
 .application {
   display: flex;
+}
+
+body {
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #122012;
+  margin: 0 8px;
+  background-color: #fbfbfb;
 }
