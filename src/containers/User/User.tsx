@@ -54,80 +54,83 @@ const User = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
-      <input className="personalInformation"
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleInputChange}
-        placeholder="Name"
-      />
-      <input className="personalInformation"
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleInputChange}
-        placeholder="Password"
-      />
-      <input className="personalInformation"
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleInputChange}
-        placeholder="Email"
-      />
-      <input className="personalInformation"
-        type="text"
-        name="city"
-        value={formData.city}
-        onChange={handleInputChange}
-        placeholder="City"
-      />
-  
-      <label>
-        Use Food Waste Discounts:
-        <input
-          type="checkbox"
-          name="useFoodWasteDiscounts"
-          checked={formData.useFoodWasteDiscounts}
+    <>
+      <h1>User</h1>
+      <form onSubmit={handleSubmit} className="form-container">
+        <input className="personalInformation"
+          type="text"
+          name="name"
+          value={formData.name}
           onChange={handleInputChange}
+          placeholder="Name"
         />
-        <br/>
-      </label>
-      Calories
-      <input
-        type="text"
-        name="calories"
-        value={formData.calories}
-        onChange={handleNumberChange}
-        placeholder="Calories"
-      />
-      Protein
-      <input
-        type="text"
-        name="protein"
-        value={formData.protein}
-        onChange={handleNumberChange}
-        placeholder="Protein (g)"
-      />
-      Carbohydrates
-      <input
-        type="number"
-        name="carbs"
-        value={formData.carbs}
-        onChange={handleNumberChange}
-        placeholder="Carbs (g)"
-      />
-      Fat
-      <input
-        type="text"
-        name="fat"
-        value={formData.fat}
-        onChange={handleNumberChange}
-        placeholder="Fat (g)"
-      />
-      <button type="submit">Submit</button>
-    </form>
+        <input className="personalInformation"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          placeholder="Password"
+        />
+        <input className="personalInformation"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Email"
+        />
+        <input className="personalInformation"
+          type="text"
+          name="city"
+          value={formData.city}
+          onChange={handleInputChange}
+          placeholder="City"
+        />
+    
+        <label>
+          Use Food Waste Discounts:
+          <input
+            type="checkbox"
+            name="useFoodWasteDiscounts"
+            checked={formData.useFoodWasteDiscounts}
+            onChange={handleInputChange}
+            />
+          <br/>
+        </label>
+        Calories
+        <input
+          type="text"
+          name="calories"
+          value={formData.calories}
+          onChange={handleNumberChange}
+          placeholder="Calories"
+          />
+        Protein
+        <input
+          type="text"
+          name="protein"
+          value={formData.protein}
+          onChange={handleNumberChange}
+          placeholder="Protein (g)"
+        />
+        Carbohydrates
+        <input
+          type="number"
+          name="carbs"
+          value={formData.carbs}
+          onChange={handleNumberChange}
+          placeholder="Carbs (g)"
+        />
+        Fat
+        <input
+          type="text"
+          name="fat"
+          value={formData.fat}
+          onChange={handleNumberChange}
+          placeholder="Fat (g)"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 };
 

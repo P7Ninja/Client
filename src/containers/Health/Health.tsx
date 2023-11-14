@@ -34,7 +34,8 @@ const Health = () => {
     };
     
 
-    return <div>
+    return <>
+    <h1>Health</h1>
         <form onSubmit={handleSubmit} className="formContainer">
         Weight
         <input
@@ -53,7 +54,7 @@ const Health = () => {
          />
          <button type="submit">Add Item</button>
         </form>
-    </div>
+    </>
 }
 
 export default Health;

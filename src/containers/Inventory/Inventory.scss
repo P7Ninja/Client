@@ -1,73 +1,134 @@
+$base-color: rgb(29, 29, 29);
+
 body {
     color: rgb(25, 25, 25);
     background-color: rgb(247, 247, 247);
 }
 
+h1 {
+    margin: 10px 0;
+}
+
+.inv-selector-container {
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    background-color: #00000009;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #00000010;
+}
+
 .inv-selector {
     cursor: default;
-    border-radius: 12px;
-    padding: 0 15px;
-    margin-top: 20px;
-    color: rgb(33, 33, 33);
-    background-color: #0f0f0f0f;
+    padding: 10px 30px;
+    transition: all 200ms ease-in-out;
+    width: fit-content;
+    font-size: 1.1rem;
+    box-shadow: 0 0 0px #00000020;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    margin: 4px;
 }
 
 .selected {
-    background-color: #0f0f0f31;
+    box-shadow: 0 0 5px #00000020;
+    background-color: #f6f6f6;
+    border: 1px solid #00000030;
+}
+
+.day-btn {
+    padding: 0;
+    aspect-ratio: 1 / 1;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.4rem !important;
+    border: unset;
+    align-self: center;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+}
+
+.day-btn:hover {
+    background-color: #00000025;
 }
 
 .form-container {
     max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 12px;
+    background-color: #00000005;
+    border: 1px solid #00000010;
+    padding: 16px;
+    box-shadow: 0 5px 10px #0001;
 }
-.form-container select {
-    max-width: 200px;
+.form-container :is(input, select, button) {
+    font-size: 1rem;
 }
-.form-container label {
-    display: block;
-    width: fit-content;
+
+.date-row {
+    display: flex;
+    gap: 15px;
+}
+
+.date-row .day-div {
+    display: flex;
+    flex-direction: column;
+    overflow-x: visible;
+}
+
+.date-row .day-div span {
+    text-align: center;
+    
 }
 
 input,
-select {
+select,
+option {
     margin: 5px 0;
-    padding: 5px 15px;
-    border-radius: 12px;
+    padding: 12px 15px;
     outline: none;
     color: #141414;
-    border: 1px solid rgb(33, 33, 33);
-    box-shadow: 0 0 black;
-    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid #00000030;
+    background-color: transparent;
+    transition: all 100ms ease-in-out;
+    // font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 input:focus,
 select:focus {
-    box-shadow: 0 3px black;
+    box-shadow: 0 2px $base-color;
+    border-bottom: 1px solid $base-color;
 }
 
 button {
-    color: rgb(33, 33, 33);
-    padding: 5px 15px;
-    border: 1px solid black;
+    color: black;
+    padding: 15px 15px;
+    border: 1px solid #00000030;
+    background-color: #00000005;
     border-radius: 12px;
-    box-shadow: 0 0 black;
-    background-color: transparent;
+    transition: all 200ms ease-in-out;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+button:disabled {
+    color: grey;
+    border: 1px solid #00000000;
 }
 
 button:hover {
-    box-shadow: 0 3px black;
+    background-color: transparent;
 }
-
-.secondary-btn {
-    color: rgb(33, 33, 33);
-    background-color: #0f0f0f0f;
-    border: none;
-    box-shadow: none;
-}
-
-.secondary-btn:hover {
-    box-shadow: none;
-    border: none;
-    background-color: #0f0f0f31;
+button:disabled:hover {
+    background-color: #00000005;
 }
 
 .delete-btn-container:hover .delete-btn {
@@ -75,14 +136,32 @@ button:hover {
 }
 
 .delete-btn {
-    padding: 5px 10px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    aspect-ratio: 1 / 1;
+    border: none;
+}
+.delete-btn:hover {
+    background-color: #00000025;
+}
+
+.visible {
+    opacity: 1;
 }
 
 .item {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(16, 16, 16, 0.1);
+    border-bottom: 1px solid #00000030;
+    white-space: nowrap;
+    overflow-x: hidden;
+    padding: 20px 0 19px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
     .item p {
         margin: 0;
@@ -90,3 +169,13 @@ button:hover {
     .item:last-child {
         border-bottom: none;
     }
+
+@media (max-width: 530px) {
+    button {
+        width: 100%;
+    }
+
+    .form-container {
+        max-width: 100%;
+    }
+}

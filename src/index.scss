@@ -104,11 +104,24 @@
   display: flex;
 }
 
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body{
   line-height: 1.6;
   font-weight: 400;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #122012;
-  margin: 0 8px;
-  background-color: #fbfbfb;
+  color: #121212;
+  margin: 0 16px;
+  background-color: #f6f6f6;
+}
+html * {
+  font-family: 'Roboto', sans-serif;
+}
+.container {
+  max-width: 900px;
+}
+
+@media (max-width: 530px) {
+  .container {
+      width: 100%;
+  }
 }

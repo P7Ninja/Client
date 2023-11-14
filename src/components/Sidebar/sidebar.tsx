@@ -13,14 +13,14 @@ const _Sidebar = () => {
             <div className='sidebar'>
                 <div className='stuff'>
                     <div className='logo'>
-                        <span>🥬</span>
-                        <span>App Name</span>
+                        <span>🥪</span>
+                        <span>Yeee</span>
                     </div>
                     <button onClick={() => setShowMenu(!showMenu)} className={showMenu? "switch rotated" : "switch"}><div/><div/><div/></button>
                 </div>
                 <div className={showMenu ? "menu" : "menu hide"}>
                     {pages.map(page => {
-                        return <Item hideMenu={() => setShowMenu(false)} link={page[0]} name={page[1]}/>
+                        return <Item key={page[0]} hideMenu={() => setShowMenu(false)} link={page[0]} name={page[1]}/>
                     })}
                 </div>
             </div>
@@ -36,7 +36,7 @@ interface ItemProps {
 const Item = (props: ItemProps) => {
     const loc = useLocation();
     const isActive = loc.pathname.includes(props.link);
-    return <div className={isActive ? "menu-item item-active" : "menu-item"}><Link to={props.link} onClick={props.hideMenu}>{props.name}</Link></div>
+    return <Link to={props.link} onClick={props.hideMenu}><div className={isActive ? "menu-item item-active" : "menu-item"}>{props.name}</div></Link>
 }
 
 export default _Sidebar;
