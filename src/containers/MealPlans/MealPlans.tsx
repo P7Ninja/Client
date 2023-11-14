@@ -1,7 +1,8 @@
 const MealPlans = () => {
-    return <div className="container">
+    return <>
+        <h1>Meal plan</h1>
         <button id="generateMealPlan">Generate meal plan</button>
-    </div>
+    </>
 }
 
 export default MealPlans;

@@ -106,7 +106,8 @@ const Health = () => {
     };
     
 
-    return <div>
+    return <>
+    <h1>Health</h1>
         <form onSubmit={handleSubmit} className="formContainer">
         <label htmlFor="Date">Date</label>
         <input

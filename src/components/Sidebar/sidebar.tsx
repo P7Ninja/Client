@@ -1,32 +1,42 @@
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link, useLocation } from 'react-router-dom';
 import './sidebar.scss';
+import { useState } from 'react';
 
 const _Sidebar = () => {
-    const activeStyle = {
-        color: 'white',
-        backgroundColor: '#57d570',
-    };
-
-    const location = useLocation(); // Hook to get the current location
-
-    // Function to determine if the item is active
-    const isActive = (pathname: string): boolean => {
-        return location.pathname === pathname;
-    };
-
+    const [showMenu, setShowMenu] = useState(false);
+    const pages = [["/user", "User"],
+                   ["/mealplans", "Meal Plans"],
+                   ["/inventory", "Inventory"],
+                   ["/health", "Health"]];
     return (
-        <div className="sidebar">
-            <Sidebar>
-                <Menu className="menu">
-                    <MenuItem className="menu-item" style={isActive('/user') ? activeStyle : undefined} component={<Link to="/user"/>}>User</MenuItem>
-                    <MenuItem className="menu-item" style={isActive('/mealplans') ? activeStyle : undefined} component={<Link to="/mealplans"/>}>Meal Plans</MenuItem>
-                    <MenuItem className="menu-item" style={isActive('/inventory') ? activeStyle : undefined} component={<Link to="/inventory"/>}>Inventory</MenuItem>
-                    <MenuItem className="menu-item" style={isActive('/health') ? activeStyle : undefined} component={<Link to="/health"/>}>Health</MenuItem>  
-                </Menu>
-            </Sidebar>
+        <div style={{height: "100wh"}}>
+            <div className='sidebar'>
+                <div className='stuff'>
+                    <div className='logo'>
+                        <span>🥪</span>
+                        <span>Yeee</span>
+                    </div>
+                    <button onClick={() => setShowMenu(!showMenu)} className={showMenu? "switch rotated" : "switch"}><div/><div/><div/></button>
+                </div>
+                <div className={showMenu ? "menu" : "menu hide"}>
+                    {pages.map(page => {
+                        return <Item key={page[0]} hideMenu={() => setShowMenu(false)} link={page[0]} name={page[1]}/>
+                    })}
+                </div>
+            </div>
         </div>
     );
 };
+
+interface ItemProps {
+    link: string,
+    name: string,
+    hideMenu: () => void,
+}
+const Item = (props: ItemProps) => {
+    const loc = useLocation();
+    const isActive = loc.pathname.includes(props.link);
+    return <Link to={props.link} onClick={props.hideMenu}><div className={isActive ? "menu-item item-active" : "menu-item"}>{props.name}</div></Link>
+}
 
 export default _Sidebar;

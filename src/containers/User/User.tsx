@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import './User.scss';
 
 type FormState = {
@@ -49,73 +49,70 @@ const User = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
-      <div id="input-row">
-        <input className="personalInformation" id="name"
+    <>
+      <h1>User</h1>
+      <form onSubmit={handleSubmit} className="form-container">
+        <input className="personalInformation"
           type="text"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
           placeholder="Name"
         />
-        <input className="personalInformation" id="password"
+        <input className="personalInformation"
           type="password"
           name="password"
           value={formData.password}
           onChange={handleInputChange}
           placeholder="Password"
         />
-      </div>
-      <div id="input-row">
-        <input className="personalInformation" id="email"
+        <input className="personalInformation"
           type="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
           placeholder="Email"
         />
-        <input className="personalInformation" id="city"
+        <input className="personalInformation"
           type="text"
           name="city"
           value={formData.city}
           onChange={handleInputChange}
           placeholder="City"
         />
-      </div>
-  
-      <label>
-        Use Food Waste Discounts:
-        <input
-          type="checkbox"
-          name="useFoodWasteDiscounts"
-          checked={formData.useFoodWasteDiscounts}
-          onChange={handleInputChange}
-        />
-        <br/>
-      </label>
-      <div id="nutritionInformation">
+    
+        <label>
+          Use Food Waste Discounts:
+          <input
+            type="checkbox"
+            name="useFoodWasteDiscounts"
+            checked={formData.useFoodWasteDiscounts}
+            onChange={handleInputChange}
+            />
+          <br/>
+        </label>
         Calories
         <input
           type="text"
           name="calories"
           value={formData.calories}
-          onChange={handleInputChange}
+          onChange={handleNumberChange}
           placeholder="Calories"
-        />
+          />
         Protein
         <input
           type="text"
           name="protein"
           value={formData.protein}
-          onChange={handleInputChange}
+          onChange={handleNumberChange}
           placeholder="Protein (g)"
         />
         Carbohydrates
         <input
-          type="text"
+          type="number"
           name="carbs"
           value={formData.carbs}
-          onChange={handleInputChange}
+          onChange={handleNumberChange}
           placeholder="Carbs (g)"
         />
         Fat
@@ -123,12 +120,12 @@ const User = () => {
           type="text"
           name="fat"
           value={formData.fat}
-          onChange={handleInputChange}
+          onChange={handleNumberChange}
           placeholder="Fat (g)"
         />
-      </div>
-      <button type="submit" className="submit">Submit</button>
-    </form>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 };
 
