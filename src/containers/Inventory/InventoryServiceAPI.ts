@@ -22,7 +22,7 @@ export interface IInventoryService {
 }
 
 export class InventoryService implements IInventoryService {
-    private baseUrl = "http://localhost:1234"
+    private baseUrl = "http://localhost:1234";
     async GetAllForUser(userId: number): Promise<Inventory[]> {
         return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/user/${userId}`).then(res => res.json())
     }

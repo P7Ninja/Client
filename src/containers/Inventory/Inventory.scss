@@ -12,12 +12,15 @@ h1 {
 .inv-selector-container {
     width: fit-content;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-top: 30px;
     background-color: #00000009;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: scroll;
     border: 1px solid #00000010;
+    width: fit-content;
+    max-width: 100%;
+    white-space: nowrap;;
 }
 
 .inv-selector {
