@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 
 type FormState = {
     Date: string;
@@ -29,6 +29,8 @@ const Health = () => {
         MusclePercentage: 0,
         WaterPercentage: 0,
     });
+
+    var [entries, setGetEntries] = useState<FormState[]>([{Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0}]);
     
     const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -37,7 +39,6 @@ const Health = () => {
             [name]: value, // value is a string in the format "YYYY-MM-DD"
         });
     };
-    
     
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -66,8 +67,7 @@ const Health = () => {
         
         // insert delete request here
     };
-
-    
+ 
     const handleGetLastEntry = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         
@@ -89,6 +89,20 @@ const Health = () => {
         document.getElementById("FatPercentage")!.innerHTML = "Fat Percentage: " + lastEntry.FatPercentage;
         document.getElementById("MusclePercentage")!.innerHTML = "Muscle Percentage: " + lastEntry.MusclePercentage;
         document.getElementById("WaterPercentage")!.innerHTML = "Water Percentage: " + lastEntry.WaterPercentage;          
+    };
+
+    const handleGetEntries = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        
+
+        // replace below with get request
+        entries = [{Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0},
+                   {Date: 'test2', Height: 1, Weight: 1, FatPercentage: 1, MusclePercentage: 1, WaterPercentage: 1},
+                   {Date: 'test3', Height: 2, Weight: 2, FatPercentage: 2, MusclePercentage: 2, WaterPercentage: 2}];
+        // end of replace
+
+        setGetEntries(entries);
+        
     };
     
 
@@ -157,12 +171,30 @@ const Health = () => {
         <form onSubmit={handleGetLastEntry} className="formContainer">
             <button type="submit">Get Last Entry</button>
             <br/>
-            <p id="Date">Date: {lastEntry.Date}</p>
-            <p id="Height">Height: {lastEntry.Height}</p>
-            <p id="Weight">Weight: {lastEntry.Weight}</p>
-            <p id="FatPercentage">Fat Percentage: {lastEntry.FatPercentage}</p>
-            <p id="MusclePercentage">Muscle Percentage: {lastEntry.MusclePercentage}</p>
-            <p id="WaterPercentage">Water Percentage: {lastEntry.WaterPercentage}</p>
+            <form className="formContainer">
+                <p id="Date">Date: {lastEntry.Date}</p>
+                <p id="Height">Height: {lastEntry.Height}</p>
+                <p id="Weight">Weight: {lastEntry.Weight}</p>
+                <p id="FatPercentage">Fat Percentage: {lastEntry.FatPercentage}</p>
+                <p id="MusclePercentage">Muscle Percentage: {lastEntry.MusclePercentage}</p>
+                <p id="WaterPercentage">Water Percentage: {lastEntry.WaterPercentage}</p>
+            </form>
+        </form>
+        <form onSubmit={handleGetEntries} className="formContainer">
+            <button type="submit">Get Entries</button>
+            <br/>
+            <tbody>
+                {entries.map((entry) => (
+                    <tr key={entry.Date}>
+                        <td>{entry.Date}</td>
+                        <td>{entry.Height}</td>
+                        <td>{entry.Weight}</td>
+                        <td>{entry.FatPercentage}</td>
+                        <td>{entry.MusclePercentage}</td>
+                        <td>{entry.WaterPercentage}</td>
+                    </tr>
+                ))}
+            </tbody>
         </form>
     </div>
 }
