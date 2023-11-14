@@ -1,6 +1,10 @@
 import Sidebar from './components/Sidebar/sidebar'
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
+
+import Sidebar from './components/Sidebar/sidebar'
+import TopNavigationBar from './components/TopNavigationBar/topnavigationbar'
+
 import User from './containers/User/User'
 import MealPlans from './containers/MealPlans/MealPlans'
 import Health from './containers/Health/Health'
@@ -37,6 +41,7 @@ export default App
 //   const [birthdate, setBirthdate] = useState("1999-01-01")
 //   const [isCreatingUser, setIsCreatingUser] = useState(false)
   
+
 //   if (!isCreatingUser) {
 //     return (
 //       <>
