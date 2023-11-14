@@ -1,0 +1,159 @@
+$base-color: #ffffff;
+$on-base-color: rgb(61, 61, 61);
+
+.sidebar {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    color: $on-base-color;
+    height: 100vh;
+    min-width: max-content;
+    position: sticky;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    height: 50px;
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+a {
+    color: $on-base-color;
+    text-decoration: none;
+}
+
+.menu-item {
+    padding: 15px 10px;
+    margin-bottom: 5px;
+}
+
+.item-active::after {
+    content: '';
+    display: block;
+    translate: 0 3px;
+    border-bottom: 3px solid $on-base-color;
+    margin-top: -3px;
+    width: 100%;
+    animation: in 200ms forwards;
+}
+@keyframes in {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+.switch {
+    all: unset;
+    display: none;
+    height: 25px;
+    padding: 20px;
+    aspect-ratio: 1/1;
+    cursor: default;
+    border: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    rotate: 0deg;
+    transition: rotate 200ms ease-in-out;
+    user-select: none;
+}
+.switch div {
+    width: 100%;
+    background-color: $on-base-color;
+    height: 2px;
+    transform-origin: bottom left;
+    translate: 0 -1px;
+    border-radius: 20px;
+    transition: all 200ms ease-in-out;
+}
+.switch div:first-child,
+.switch div:last-child {
+    width: 60%;
+}
+
+.switch:hover {
+    border: unset;
+    outline: none;
+    box-shadow: unset;
+}
+
+@media (max-width: 530px) {
+    body {
+        margin-top: 72px !important;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .logo {
+        flex-direction: row;
+        width: unset;
+        align-items: center;
+        margin: unset;
+    }
+    .item-active::after {
+        animation: unset;
+    }
+
+    .sidebar {
+        background-color: $base-color;
+        box-shadow: 0 0 10px #0002;
+        border-radius: 12px;
+        position: fixed;
+        height: unset;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 8px;
+        border: 1px solid #00000030;
+        overflow-y: hidden;
+        transition: transform 200ms ease-in-out;
+    }
+    .stuff {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+    .menu {
+        width: 100%;
+        transition: all 250ms ease;
+        overflow-y: hidden;
+        opacity: 1;
+        max-height: 300px;
+        will-change: opacity, max-height;
+    }
+    
+    .hide {
+        opacity: 0;
+        max-height: 0px;
+    }
+
+    .switch {
+        display: flex;
+    }
+
+    .rotated div:first-child{
+        rotate: 45deg;
+        transform: translateY(50%) scaleX(1.3);
+        width: 100%;
+    }
+    .rotated div:nth-child(2) {
+        width: 0;
+    }
+    .rotated div:nth-child(3) {
+        transform: translateY(50%) scaleX(1.3);
+        rotate: -45deg;
+        width: 100%;
+    }
+}

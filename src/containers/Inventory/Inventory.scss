@@ -1,0 +1,184 @@
+$base-color: rgb(29, 29, 29);
+
+body {
+    color: rgb(25, 25, 25);
+    background-color: rgb(247, 247, 247);
+}
+
+h1 {
+    margin: 10px 0;
+}
+
+.inv-selector-container {
+    width: fit-content;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 30px;
+    background-color: #00000009;
+    border-radius: 12px;
+    overflow: scroll;
+    border: 1px solid #00000010;
+    width: fit-content;
+    max-width: 100%;
+    white-space: nowrap;;
+}
+
+.inv-selector {
+    cursor: default;
+    padding: 10px 30px;
+    transition: all 200ms ease-in-out;
+    width: fit-content;
+    font-size: 1.1rem;
+    box-shadow: 0 0 0px #00000020;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    margin: 4px;
+}
+
+.selected {
+    box-shadow: 0 0 5px #00000020;
+    background-color: #f6f6f6;
+    border: 1px solid #00000030;
+}
+
+.day-btn {
+    padding: 0;
+    aspect-ratio: 1 / 1;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.4rem !important;
+    border: unset;
+    align-self: center;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+}
+
+.day-btn:hover {
+    background-color: #00000025;
+}
+
+.form-container {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 12px;
+    background-color: #00000005;
+    border: 1px solid #00000010;
+    padding: 16px;
+    box-shadow: 0 5px 10px #0001;
+}
+.form-container :is(input, select, button) {
+    font-size: 1rem;
+}
+
+.date-row {
+    display: flex;
+    gap: 15px;
+}
+
+.date-row .day-div {
+    display: flex;
+    flex-direction: column;
+    overflow-x: visible;
+}
+
+.date-row .day-div span {
+    text-align: center;
+    
+}
+
+input,
+select,
+option {
+    margin: 5px 0;
+    padding: 12px 15px;
+    outline: none;
+    color: #141414;
+    border: none;
+    border-bottom: 1px solid #00000030;
+    background-color: transparent;
+    transition: all 100ms ease-in-out;
+    // font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+input:focus,
+select:focus {
+    box-shadow: 0 2px $base-color;
+    border-bottom: 1px solid $base-color;
+}
+
+button {
+    color: black;
+    padding: 15px 15px;
+    border: 1px solid #00000030;
+    background-color: #00000005;
+    border-radius: 12px;
+    transition: all 200ms ease-in-out;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+button:disabled {
+    color: grey;
+    border: 1px solid #00000000;
+}
+
+button:hover {
+    background-color: transparent;
+}
+button:disabled:hover {
+    background-color: #00000005;
+}
+
+.delete-btn-container:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    aspect-ratio: 1 / 1;
+    border: none;
+}
+.delete-btn:hover {
+    background-color: #00000025;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.item {
+    border-bottom: 1px solid #00000030;
+    white-space: nowrap;
+    overflow-x: hidden;
+    padding: 20px 0 19px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+    .item p {
+        margin: 0;
+    }
+    .item:last-child {
+        border-bottom: none;
+    }
+
+@media (max-width: 530px) {
+    button {
+        width: 100%;
+    }
+
+    .form-container {
+        max-width: 100%;
+    }
+}
