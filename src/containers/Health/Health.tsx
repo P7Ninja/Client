@@ -96,7 +96,7 @@ const Health = () => {
         
 
         // replace below with get request
-        entries = [{Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0},
+        entries = [//{Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0},
                    {Date: 'test2', Height: 1, Weight: 1, FatPercentage: 1, MusclePercentage: 1, WaterPercentage: 1},
                    {Date: 'test3', Height: 2, Weight: 2, FatPercentage: 2, MusclePercentage: 2, WaterPercentage: 2}];
         // end of replace
