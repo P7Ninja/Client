@@ -242,6 +242,8 @@ function Inventories(props: InventoriesProps) {
           <button className='delete-btn visible' style={{ float: "right" }} onClick={async () => deleteInv()}>⨉</button>
           <h2>{inv.name}</h2>
           <div className='items-container'>
+            {inv.items.length == 0 && 
+              <h1 style={{textAlign: "center"}}>😔 <i>Feed me</i> 👉👈</h1>}
             {inv.items.map(item => {
               const daysToExpiration = Math.ceil((new Date(item.expirationDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
               return (
