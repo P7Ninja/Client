@@ -1,3 +1,5 @@
+import { Food } from "./FoodServiceAPI";
+
 export type Inventory = {
     id: number,
     userId: number,
@@ -11,6 +13,7 @@ export type InventoryItem = {
     expirationDate: string,
     timestamp: string,
     name: string | null,
+    food : Food | null,
 }
 
 export interface IInventoryService {
@@ -22,13 +25,13 @@ export interface IInventoryService {
 }
 
 export class InventoryService implements IInventoryService {
-    private baseUrl = "http://localhost:1234";
+    private baseUrl = "https://localhost:5000/";
     async GetAllForUser(userId: number): Promise<Inventory[]> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/user/${userId}`).then(res => res.json())
+        return await fetch(`${this.baseUrl}api/inventories/user/${userId}`).then(res => res.json())
     }
 
     async Post(userId: number, name: string): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories`,
+        return await fetch(`${this.baseUrl}api/inventories`,
             {
                 method: "POST",
                 body: JSON.stringify({ "userId": userId, "name": name }),
@@ -37,7 +40,7 @@ export class InventoryService implements IInventoryService {
     }
 
     async PostToInv(invId: number, foodId: number, expirationDate: string): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/${invId}`,
+        return await fetch(`${this.baseUrl}api/inventories/${invId}`,
             {
                 method: "POST",
                 body: JSON.stringify({ "foodId": foodId, "expirationDate": expirationDate }),
@@ -46,10 +49,10 @@ export class InventoryService implements IInventoryService {
     }
 
     async DeleteItem(invId: number, itemId: number): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/${invId}/${itemId}`, { method: "Delete" })
+        return await fetch(`${this.baseUrl}api/inventories/${invId}/${itemId}`, { method: "Delete" })
     }
     
     async DeleteInv(invId: number): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/${invId}`, { method: "Delete" })
+        return await fetch(`${this.baseUrl}api/inventories/${invId}`, { method: "Delete" })
     }
 }

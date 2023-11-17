@@ -113,7 +113,7 @@ function InventoryPage() {
       });
       const invFoods = await foodService.GetFoods(foodIds).then(data => data);
       invs.forEach(inv => {
-        inv.items.forEach(i => i.name = invFoods.filter(f => f.id == i.foodId)[0].name);
+        inv.items.forEach(i => i.food = invFoods.filter(f => f.id == i.foodId)[0]);
       });
     }
 
@@ -153,7 +153,7 @@ function InventoryPage() {
               onChange={handleDateChange}
               placeholder="Expiration date"
               style={{ flexGrow: "1" }}
-            />
+              />
             <div className='date-row'>
               <button className='day-btn' type='button' onClick={() => addDays(-1)}>-</button>
               <div className='day-div'>
@@ -188,6 +188,7 @@ interface InventoriesProps {
 }
 
 function Inventories(props: InventoriesProps) {
+  const [description,setDescription] = useState(false);
   const inv = props.inventories[props.current];
   const [showNewInv, setShowNewInv] = useState(false);
 
@@ -239,29 +240,41 @@ function Inventories(props: InventoriesProps) {
       {/* Show the items of the selected inventory */}
       {!showNewInv &&
         <div style={{ maxWidth: "500px" }}>
-          <button className='delete-btn visible' style={{ float: "right" }} onClick={async () => deleteInv()}>⨉</button>
-          <h2>{inv.name}</h2>
+            <input type='checkbox' id='details' className='get-btn' onClick={() => setDescription(!description)} />
+          <label htmlFor='details'>Details</label>
+          <h2>{inv.name} <button className='delete-btn visible' style={{ float: "right" }} onClick={async () => deleteInv()}>⨉</button> </h2>     
           <div className='items-container'>
-            {inv.items.length == 0 && 
+            {inv.items.length == 0 &&
               <h1 style={{textAlign: "center"}}>😔 <i>Feed me</i> 👉👈</h1>}
             {inv.items.map(item => {
               const daysToExpiration = Math.ceil((new Date(item.expirationDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
               return (
                 <div key={item.id} className='delete-btn-container item'>
+                  <div style={{display: "flex", flexDirection: "column"}}>
+                    {daysToExpiration < 0 && 
+                      <p style={{ color: "darkgrey" }}>
+                        {item.food?.name} (🪦 {Math.abs(daysToExpiration)} {daysToExpiration == -1 ? "day" : "days"} ago)
+                        </p>}
 
-                  {daysToExpiration < 0 &&
-                    <p style={{ color: "darkgrey" }}>
-                      {item.name} (expired {Math.abs(daysToExpiration)} {daysToExpiration == -1 ? "day" : "days"} ago)
-                    </p>}
+                    {daysToExpiration > 0 &&
+                      <p>
+                        {item.food?.name} (expired {daysToExpiration} {daysToExpiration == 1 ? "day" : "days"})
+                      </p>}
 
-                  {daysToExpiration > 0 &&
-                    <p>
-                      {item.name} (expires in {daysToExpiration} {daysToExpiration == 1 ? "day" : "days"})
-                    </p>}
+                    {daysToExpiration == 0 &&
+                      <p> {item.food?.name} (expires today)</p>}
 
-                  {daysToExpiration == 0 &&
-                    <p> {item.name} (expires today)</p>}
 
+
+                    {description == true &&             
+                    <div>
+                      <p > Cal : {item.food?.cal}</p>
+                      <p > Carbs : {item.food?.carbs}</p>
+                      <p > Fat : {item.food?.fat}</p>
+                      <p > Protein : {item.food?.protein}</p>
+                    </div>
+                    }
+                  </div>
                   <button className='delete-btn' onClick={() => deleteItem(item.id)}>⨉</button>
                 </div>
               )

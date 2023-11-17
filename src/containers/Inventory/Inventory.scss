@@ -21,6 +21,11 @@ h1 {
     width: fit-content;
     max-width: 100%;
     white-space: nowrap;;
+    scrollbar-width: none;
+}
+
+.get-btn {
+    margin-right: 10px;
 }
 
 .inv-selector {
