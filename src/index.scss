@@ -1,86 +1,77 @@
-// :root {
-//   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-//   line-height: 1.5;
-//   font-weight: 400;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
-//   color-scheme: light dark;
-//   color: rgba(255, 255, 255, 0.87);
-//   background-color: #242424;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 
-//   font-synthesis: none;
-//   text-rendering: optimizeLegibility;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   -webkit-text-size-adjust: 100%;
-// }
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
 
-// input {
-//   padding: 10px;
-//   border-radius: 8px;
-//   outline: none;
-//   border: 1px solid green;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-//   background-color: transparent;
-// }
+input {
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid green;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
 
-// input[type="radio"] {
-//   accent-color: green;
-// } 
+input[type="radio"] {
+  accent-color: green;
+} 
 
+a {
+  font-weight: 500;
+  color: green;
+  text-decoration: inherit;
+  cursor: pointer;
+}
+a:hover {
+  color: rgb(0, 105, 0);
+}
 
-// a {
-//   font-weight: 500;
-//   color: green;
-//   text-decoration: inherit;
-//   cursor: pointer;
-// }
-// a:hover {
-//   color: rgb(0, 105, 0);
-// }
+form {
+  padding: 20px 75px;
+  background-color: #1e1e1e;
+  border-radius: 30px;
+}
 
-// form {
-//   padding: 20px 75px;
-//   background-color: #1e1e1e;
-//   border-radius: 30px;
-// }
+body {
+  margin: 0;
+  display: inline-block;
+  place-items: center;
+}
 
-// body {
-//   margin: 0;
-//   display: flex;
-//   place-items: center;
-//   min-width: 320px;
-//   min-height: 100vh;
-// }
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: rgb(232, 232, 232);
+}
 
-// h1 {
-//   font-size: 3.2em;
-//   line-height: 1.1;
-//   color: rgb(232, 232, 232);
-// }
+form button, button {
+  width: 60%;
+  padding: 16px 0;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  margin: 25px 0 10px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: green;
+  cursor: pointer;
+  transition: 0.1s ease;
+  color: white;
+}
 
-// form button {
-//   width: 100%;
-//   padding: 16px 0;
-//   border-radius: 4px;
-//   border: none;
-//   outline: none;
-//   margin: 25px 0 10px;
-//   font-size: 1em;
-//   font-weight: 500;
-//   font-family: inherit;
-//   background-color: green;
-//   cursor: pointer;
-//   transition: 0.1s ease;
-//   color: white;
-// }
-// button:hover {
-//   background: rgb(0, 105, 0);
-// }
-// button:focus,
-// button:focus-visible {
-//   outline: 4px auto -webkit-focus-ring-color;
-// }
 
 // @media (prefers-color-scheme: light) {
 //   :root {
