@@ -197,7 +197,7 @@ const Health = () => {
                 ))}
             </tbody>
         </form>
-    </div>
+    </>;
 }
 
 export default Health;

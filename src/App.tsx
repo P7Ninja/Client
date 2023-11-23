@@ -2,9 +2,6 @@ import Sidebar from './components/Sidebar/sidebar'
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
 
-import Sidebar from './components/Sidebar/sidebar'
-import TopNavigationBar from './components/TopNavigationBar/topnavigationbar'
-
 import User from './containers/User/User'
 import MealPlans from './containers/MealPlans/MealPlans'
 import Health from './containers/Health/Health'
