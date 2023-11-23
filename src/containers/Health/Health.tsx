@@ -1,4 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
+import HealthChart from './Health_Graph';
+import { Line } from 'react-chartjs-2';
+
 
 type FormState = {
     Date: string;
@@ -29,8 +32,10 @@ const Health = () => {
         MusclePercentage: 0,
         WaterPercentage: 0,
     });
+    const enty = {Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0};
 
     var [entries, setGetEntries] = useState<FormState[]>([{Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0}]);
+    
     
     const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -184,6 +189,8 @@ const Health = () => {
         <form onSubmit={handleGetEntries} className="formContainer">
             <button type="submit">Get Entries</button>
             <br/>
+            <h1>Health Entry Visualization</h1>
+            <HealthChart data={entries}/>
             <tbody>
                 {entries.map((entry) => (
                     <tr key={entry.Date}>
@@ -197,7 +204,8 @@ const Health = () => {
                 ))}
             </tbody>
         </form>
-    </div>
+    </>
 }
 
 export default Health;
+
