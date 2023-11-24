@@ -116,7 +116,7 @@ function InventoryPage() {
       });
       const invFoods = await foodService.GetFoods(foodIds).then(data => data);
       invs.forEach(inv => {
-        inv.items.forEach(i => i.name = invFoods.filter(f => f.id == i.foodId)[0].name);
+        inv.items.forEach(i => i.name = invFoods.filter(f => f.id == i.foodId)[0] == null ? "Unknown" : invFoods.filter(f => f.id == i.foodId)[0].name);
       });
     }
 

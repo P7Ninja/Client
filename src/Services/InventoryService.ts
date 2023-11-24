@@ -48,18 +48,20 @@ export class InventoryService implements IInventoryService {
         const headers = JwtService.getDefaultHeader();
         headers.append('content-type', 'application/json');
         return await fetch(`${this.baseUrl}/inventories/${invId}`,
-            {
-                method: "POST",
-                body: JSON.stringify({ "foodId": foodId, "expirationDate": expirationDate }),
-                headers: headers
-            });
+        {
+            method: "POST",
+            body: JSON.stringify({ "foodId": foodId, "expirationDate": expirationDate }),
+            headers: headers
+        });
     }
-
+    
     async DeleteItem(invId: number, itemId: number): Promise<Response> {
+        const headers = JwtService.getDefaultHeader();
+        headers.append('content-type', 'application/json');
         return await fetch(`${this.baseUrl}/inventories/${invId}/${itemId}`,
         { 
             method: "Delete",
-            headers: JwtService.getDefaultHeader()
+            headers: headers
         })
     }
 
