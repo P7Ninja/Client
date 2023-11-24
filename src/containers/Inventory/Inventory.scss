@@ -112,7 +112,7 @@ select:focus {
 
 button {
     color: black;
-    padding: 15px 15px;
+    padding: 15px 40px;
     border: 1px solid #00000030;
     background-color: #00000005;
     border-radius: 12px;
@@ -148,6 +148,7 @@ button:disabled:hover {
     align-self: center;
     aspect-ratio: 1 / 1;
     border: none;
+    padding: 15px;
 }
 .delete-btn:hover {
     background-color: #00000025;

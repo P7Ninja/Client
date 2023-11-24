@@ -1,7 +1,8 @@
-import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import { Food, FoodService, IFoodService } from './FoodServiceAPI';
-import { Inventory, InventoryService, IInventoryService } from './InventoryServiceAPI';
+import { useState, ChangeEvent, FormEvent, useEffect, useContext } from 'react';
+import { Food, FoodService, IFoodService } from '../../Services/FoodService';
+import { Inventory, InventoryService, IInventoryService } from '../../Services/InventoryService';
 import './Inventory.scss'
+import { UserContext } from '../../App';
 
 type FormState = {
   FoodId: number;
@@ -9,7 +10,6 @@ type FormState = {
 };
 
 const placeholder: Food = { cal: 0, carbs: 0, category: "", discount: 0, fat: 0, id: 0, name: "Search to see suggestions...", price: 0, priceKg: 0, protein: 0, vendor: "" };
-const userId = 10;
 const inventoryService: IInventoryService = new InventoryService();
 const foodService: IFoodService = new FoodService();
 
@@ -25,6 +25,8 @@ function InventoryPage() {
   const [timer, setTimer] = useState(0);
   const cancelTimer = () => { if (timer != undefined) clearTimeout(timer) }
   const days = Math.ceil((new Date(formData.ExpirationDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+  
+  const context = useContext(UserContext);
 
   // add/subtract x days to the expiration date
   const addDays = (days: number) => {
@@ -67,9 +69,10 @@ function InventoryPage() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (context.user == null) return;
     const res = await inventoryService.PostToInv(inventories[current].id, formData.FoodId, formData.ExpirationDate);
     if (res.ok) {
-      updateInvs(userId);
+      updateInvs(context.user?.id);
       setQuery("");
     }
   };
@@ -121,9 +124,11 @@ function InventoryPage() {
   }
 
   useEffect(() => {
-    updateInvs(userId);
-  }, []);
+    if (context.user == null) return;
+    updateInvs(context.user?.id);
+  }, [context.user, context.user?.id]);
 
+  if (context.user == null) return <p>Login to see inventories</p>;
 
   return (
     <>
@@ -174,7 +179,7 @@ function InventoryPage() {
         current={current}
         setCurrent={setCurrent}
         removeItem={deleteItem}
-        update={async () => await updateInvs(userId)} />
+        update={updateInvs} />
     </>
   )
 }
@@ -184,12 +189,13 @@ interface InventoriesProps {
   current: number,
   setCurrent: (i: number) => void,
   removeItem: (inv: Inventory, itemId: number) => void,
-  update: () => void,
+  update: (userId: number) => Promise<void>,
 }
 
 function Inventories(props: InventoriesProps) {
   const inv = props.inventories[props.current];
   const [showNewInv, setShowNewInv] = useState(false);
+  const context = useContext(UserContext);
 
   const deleteItem = async (itemId: number) => {
     const res = await inventoryService.DeleteItem(inv.id, itemId);
@@ -199,9 +205,10 @@ function Inventories(props: InventoriesProps) {
   }
   const deleteInv = async () => {
     if (!confirm("Delete inventory?")) return;
+    if (context.user == null) return;
     const res = await inventoryService.DeleteInv(inv.id);
     if (res.ok) {
-      props.update();
+      await props.update(context.user.id);
       props.setCurrent(0);
     }
   }
@@ -231,7 +238,7 @@ function Inventories(props: InventoriesProps) {
       {/* Show new inventory page */}
       {showNewInv &&
         <NewInventory
-          update={async () => props.update()}
+          update={props.update}
           hide={() => setShowNewInv(false)}
           newCurrent={props.inventories.length}
           setCurrent={props.setCurrent} />}
@@ -272,7 +279,7 @@ function Inventories(props: InventoriesProps) {
 }
 
 interface NewInventoryProps {
-  update: () => void,
+  update: (userId: number) => Promise<void>,
   hide: () => void,
   newCurrent: number,
   setCurrent: (i: number) => void,
@@ -280,12 +287,14 @@ interface NewInventoryProps {
 
 function NewInventory(props: NewInventoryProps) {
   const [name, setName] = useState("");
+  const context = useContext(UserContext);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await inventoryService.Post(userId, name);
+    if (context.user?.id == null) return;
+    const res = await inventoryService.Post(context.user.id, name);
     if (res.ok) {
-      props.update();
+      await props.update(context.user.id);
       props.hide();
       props.setCurrent(props.newCurrent);
     }

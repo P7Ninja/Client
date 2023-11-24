@@ -1,3 +1,5 @@
+import { JwtService } from "./JwtService";
+
 export type Inventory = {
     id: number,
     userId: number,
@@ -22,34 +24,50 @@ export interface IInventoryService {
 }
 
 export class InventoryService implements IInventoryService {
-    private baseUrl = "http://localhost:1234";
-    async GetAllForUser(userId: number): Promise<Inventory[]> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/user/${userId}`).then(res => res.json())
+    private baseUrl = "http://localhost:8001";
+    async GetAllForUser(): Promise<Inventory[]> {
+        return await fetch(`${this.baseUrl}/inventories`,
+            {
+                headers: JwtService.getDefaultHeader()
+            })
+            .then(res => res.json())
     }
 
     async Post(userId: number, name: string): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories`,
+        const headers = JwtService.getDefaultHeader();
+        headers.append('content-type', 'application/json');
+        return await fetch(`${this.baseUrl}/inventories`,
             {
                 method: "POST",
                 body: JSON.stringify({ "userId": userId, "name": name }),
-                headers: new Headers({ 'content-type': 'application/json' })
+                headers: headers
             });
     }
 
     async PostToInv(invId: number, foodId: number, expirationDate: string): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/${invId}`,
+        const headers = JwtService.getDefaultHeader();
+        headers.append('content-type', 'application/json');
+        return await fetch(`${this.baseUrl}/inventories/${invId}`,
             {
                 method: "POST",
                 body: JSON.stringify({ "foodId": foodId, "expirationDate": expirationDate }),
-                headers: new Headers({ 'content-type': 'application/json' })
+                headers: headers
             });
     }
 
     async DeleteItem(invId: number, itemId: number): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/${invId}/${itemId}`, { method: "Delete" })
+        return await fetch(`${this.baseUrl}/inventories/${invId}/${itemId}`,
+        { 
+            method: "Delete",
+            headers: JwtService.getDefaultHeader()
+        })
     }
-    
+
     async DeleteInv(invId: number): Promise<Response> {
-        return await fetch(`${this.baseUrl}/inventoryservice/api/inventories/${invId}`, { method: "Delete" })
+        return await fetch(`${this.baseUrl}/api/inventories/${invId}`,
+        {
+            method: "Delete",
+            headers: JwtService.getDefaultHeader()
+        })
     }
 }
