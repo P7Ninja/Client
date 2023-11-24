@@ -206,7 +206,7 @@ function Inventories(props: InventoriesProps) {
   const deleteInv = async () => {
     if (!confirm("Delete inventory?")) return;
     if (context.user == null) return;
-    const res = await inventoryService.DeleteInv(inv.id);
+    const res = await inventoryService.DeleteInv(inv);
     if (res.ok) {
       await props.update(context.user.id);
       props.setCurrent(0);

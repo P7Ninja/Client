@@ -20,7 +20,7 @@ export interface IInventoryService {
     Post(userId: number, name: string): Promise<Response>;
     PostToInv(invId: number, foodId: number, expirationDate: string): Promise<Response>;
     DeleteItem(invId: number, itemId: number): Promise<Response>;
-    DeleteInv(invId: number): Promise<Response>;
+    DeleteInv(inv: Inventory): Promise<Response>;
 }
 
 export class InventoryService implements IInventoryService {
@@ -39,7 +39,7 @@ export class InventoryService implements IInventoryService {
         return await fetch(`${this.baseUrl}/inventories`,
             {
                 method: "POST",
-                body: JSON.stringify({ "userId": userId, "name": name }),
+                body: JSON.stringify({ "userId": userId, "name": name}),
                 headers: headers
             });
     }
@@ -63,11 +63,15 @@ export class InventoryService implements IInventoryService {
         })
     }
 
-    async DeleteInv(invId: number): Promise<Response> {
-        return await fetch(`${this.baseUrl}/api/inventories/${invId}`,
+    async DeleteInv(inv: Inventory): Promise<Response> {
+        const headers = JwtService.getDefaultHeader();
+        headers.append('content-type', 'application/json');
+
+        return await fetch(`${this.baseUrl}/inventories/${inv.id}`,
         {
-            method: "Delete",
-            headers: JwtService.getDefaultHeader()
+            method: "DELETE",
+            headers: headers,
+            body: JSON.stringify(inv)
         })
     }
 }
