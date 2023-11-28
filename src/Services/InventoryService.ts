@@ -1,3 +1,4 @@
+import { Food } from "./FoodService";
 import { JwtService } from "./JwtService";
 
 export type Inventory = {
@@ -12,7 +13,7 @@ export type InventoryItem = {
     foodId: number,
     expirationDate: string,
     timestamp: string,
-    name: string | null,
+    food: Food | null
 }
 
 export interface IInventoryService {

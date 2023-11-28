@@ -184,6 +184,7 @@ function Inventories(props: InventoriesProps) {
   const inv = props.inventories[props.current];
   const [showNewInv, setShowNewInv] = useState(false);
   const context = useContext(UserContext);
+  const [showDetails, setShowDetails] = useState(false);
 
   const deleteItem = async (itemId: number) => {
     const res = await inventoryService.DeleteItem(inv.id, itemId);
@@ -236,6 +237,8 @@ function Inventories(props: InventoriesProps) {
         <div style={{ maxWidth: "500px" }}>
           <button className='delete-btn visible' style={{ float: "right" }} onClick={async () => deleteInv()}>⨉</button>
           <h2>{inv.name}</h2>
+          <input type='checkbox' id='details' className='get-btn' onClick={() => setShowDetails(!showDetails)} />
+          <label htmlFor='details'>Show details</label>
           <div className='items-container'>
             {inv.items.map(item => {
               const daysToExpiration = Math.ceil((new Date(item.expirationDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
@@ -244,17 +247,23 @@ function Inventories(props: InventoriesProps) {
 
                   {daysToExpiration < 0 &&
                     <p style={{ color: "darkgrey" }}>
-                      {item.name} (expired {Math.abs(daysToExpiration)} {daysToExpiration == -1 ? "day" : "days"} ago)
+                      {item.food?.name} (expired {Math.abs(daysToExpiration)} {daysToExpiration == -1 ? "day" : "days"} ago)
                     </p>}
 
                   {daysToExpiration > 0 &&
                     <p>
-                      {item.name} (expires in {daysToExpiration} {daysToExpiration == 1 ? "day" : "days"})
+                      {item.food?.name} (expires in {daysToExpiration} {daysToExpiration == 1 ? "day" : "days"})
                     </p>}
 
                   {daysToExpiration == 0 &&
-                    <p> {item.name} (expires today)</p>}
-
+                    <p> {item.food?.name} (expires today)</p>}
+                  {showDetails &&
+                      <div>
+                        <p > Cal : {item.food?.cal}</p>
+                        <p > Carbs : {item.food?.carbs}</p>
+                        <p > Fat : {item.food?.fat}</p>
+                        <p > Protein : {item.food?.protein}</p>
+                      </div>}
                   <button className='delete-btn' onClick={() => deleteItem(item.id)}>⨉</button>
                 </div>
               )
