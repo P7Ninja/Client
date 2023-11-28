@@ -18,7 +18,8 @@ export interface IHealthService {
 export class HealthService implements IHealthService {
     private baseUrl = "http://localhost";
     private headers = new Headers({ 'content-type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoxLCJleHAiOjE3MDEyNDUxMjZ9.9SCLlfN8meOFbtI5DeruR93WV4ODEk-vtrI4oAfed4A' })
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoxLCJleHAiOjE3MDEyNDUxMjZ9.9SCLlfN8meOFbtI5DeruR93WV4ODEk-vtrI4oAfed4A',
+                        'accept': 'application/json' })
     async GetHealth(): Promise<Health[]> {
         return await fetch(`${this.baseUrl}/api/health/history`,
         {
@@ -38,7 +39,7 @@ export class HealthService implements IHealthService {
     }
 
     async DeleteHealth(id: number): Promise<void> {
-        await fetch(`${this.baseUrl}/api/health/${id}`, 
+        await fetch(`${this.baseUrl}/api/health/` + id, 
         { 
             method: "DELETE",
             headers: this.headers 
