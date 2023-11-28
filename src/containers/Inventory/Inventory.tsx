@@ -236,9 +236,9 @@ function Inventories(props: InventoriesProps) {
       {!showNewInv &&
         <div style={{ maxWidth: "500px" }}>
           <button className='delete-btn visible' style={{ float: "right" }} onClick={async () => deleteInv()}>⨉</button>
-          <h2>{inv.name}</h2>
           <input type='checkbox' id='details' className='get-btn' onClick={() => setShowDetails(!showDetails)} />
-          <label htmlFor='details'>Show details</label>
+          <label htmlFor='details'> Show details</label>
+          <h2>{inv.name}</h2>
           <div className='items-container'>
             {inv.items.map(item => {
               const daysToExpiration = Math.ceil((new Date(item.expirationDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
