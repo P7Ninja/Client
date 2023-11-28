@@ -108,18 +108,6 @@ function InventoryPage() {
 
   const updateInvs = async (userId: number) => {
     const invs = await inventoryService.GetAllForUser(userId).then(data => data);
-
-    { // for getting food names. Should maybe be done on backend instead.
-      const foodIds: number[] = [];
-      invs.forEach(inv => {
-        inv.items.forEach(i => foodIds.push(i.foodId));
-      });
-      const invFoods = await foodService.GetFoods(foodIds).then(data => data);
-      invs.forEach(inv => {
-        inv.items.forEach(i => i.name = invFoods.filter(f => f.id == i.foodId)[0] == null ? "Unknown" : invFoods.filter(f => f.id == i.foodId)[0].name);
-      });
-    }
-
     setInventories(invs);
   }
 
