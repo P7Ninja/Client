@@ -159,7 +159,7 @@ function InventoryPage() {
             </div>
           </div>
           <br />
-          <button type="submit" disabled={foods.length == 0 || formData.FoodId == 0}>Add item</button>
+          <button type="submit" disabled={foods.length == 0 || formData.FoodId == 0 || inventories[current] == undefined}>Add item</button>
         </form>
       </div>
       <Inventories
