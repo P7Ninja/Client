@@ -116,8 +116,6 @@ function InventoryPage() {
     updateInvs(context.user?.id);
   }, [context.user, context.user?.id]);
 
-  if (context.user == null) return <p>Login to see inventories</p>;
-
   return (
     <>
       <div>

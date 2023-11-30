@@ -4,23 +4,25 @@ import { useState } from 'react';
 
 const _Sidebar = () => {
     const [showMenu, setShowMenu] = useState(false);
-    const pages = [["/user", "User"],
-                   ["/mealplans", "Meal Plans"],
-                   ["/inventory", "Inventory"],
-                   ["/health", "Health"]];
+    const pages = [
+        ["/mealplans", "Meal Plans"],
+        ["/inventory", "Inventory"],
+        ["/health", "Health"],
+        ["/user", "User"],
+    ];
     return (
-        <div style={{height: "100wh"}}>
+        <div style={{ height: "100wh" }}>
             <div className='sidebar'>
                 <div className='stuff'>
                     <div className='logo'>
                         <span>🥪</span>
                         <span>Yeee</span>
                     </div>
-                    <button onClick={() => setShowMenu(!showMenu)} className={showMenu? "switch rotated" : "switch"}><div/><div/><div/></button>
+                    <button onClick={() => setShowMenu(!showMenu)} className={showMenu ? "switch rotated" : "switch"}><div /><div /><div /></button>
                 </div>
                 <div className={showMenu ? "menu" : "menu hide"}>
                     {pages.map(page => {
-                        return <Item key={page[0]} hideMenu={() => setShowMenu(false)} link={page[0]} name={page[1]}/>
+                        return <Item key={page[0]} hideMenu={() => setShowMenu(false)} link={page[0]} name={page[1]} />
                     })}
                 </div>
             </div>
