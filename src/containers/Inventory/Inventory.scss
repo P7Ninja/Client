@@ -104,7 +104,7 @@ option {
     // font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-input:focus,
+input:focus:not([type="radio"], [type="checkbox"]),
 select:focus {
     box-shadow: 0 2px $base-color;
     border-bottom: 1px solid $base-color;
