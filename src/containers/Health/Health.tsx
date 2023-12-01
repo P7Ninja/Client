@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent  } from 'react';
-import { HealthService } from './HealthAPI';
+import { HealthService } from '../../Services/HealthService';
 import LineChart from './InteractiveGraph';
 
 const healthService = new HealthService();

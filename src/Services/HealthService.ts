@@ -1,3 +1,4 @@
+import { JwtService } from "./JwtService";
 
 export type Health = {
     dateStamp: Date;
@@ -27,10 +28,8 @@ export interface IHealthService {
 
 
 export class HealthService implements IHealthService {
-    private baseUrl = "http://localhost";
-    private headers = new Headers({ 'content-type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoxLCJleHAiOjE3MDE1MTIwNjl9.0dPVsFkVbguY0Z23U4Vi6A_Yw15GwTz2qOcTS8fbxPw',
-                        'accept': 'application/json' })
+    private baseUrl = "http://localhost:8001";
+    private headers = JwtService.getDefaultHeader();
     async GetHealth(): Promise<HealthEntry[]> {
         return await fetch(`${this.baseUrl}/api/health/history`,
         {
