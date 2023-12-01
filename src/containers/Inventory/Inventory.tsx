@@ -22,8 +22,8 @@ function InventoryPage() {
   const [current, setCurrent] = useState(0);
   const [query, setQuery] = useState("");
   const [foods, setFoods] = useState<Food[]>([placeholder]);
-  const [timer, setTimer] = useState(0);
-  const cancelTimer = () => { if (timer != undefined) clearTimeout(timer) }
+  // const [timer, setTimer] = useState(0);
+  // const cancelTimer = () => { if (timer != undefined) clearTimeout(timer) }
   const days = Math.ceil((new Date(formData.ExpirationDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
 
   // add/subtract x days to the expiration date
@@ -77,30 +77,35 @@ function InventoryPage() {
 
   // Handle changes in query input (triggers useEffect below)
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    cancelTimer();
+    // cancelTimer();
     setQuery(event.target.value);
   };
   // When query changes, GET foods from foodservice (after timeout)
   useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
     if (query !== "") {
-      setTimer(setTimeout(async () => {
+      timer = setTimeout(async () => {
         await foodService.GetAll(query).then(data => {
           setFoods(data);
           setFormData(f => {
             if (data[0] != undefined) f.FoodId = data[0].id;
             else f.FoodId = 0;
-            return f
+            return { ...f };
           });
         });
-      }, 300)); // Wait 300 ms for user to finish typing to send request
+      }, 300); // Wait 300 ms for user to finish typing to send request
     }
     else {
       setFoods([placeholder]);
       setFormData(f => {
         f.FoodId = 0;
-        return f;
+        return { ...f };
       });
     }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [query])
 
   const updateInvs = async (userId: number) => {
