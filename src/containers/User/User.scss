@@ -1,54 +1,44 @@
-.form-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  width: 80vw;
-  max-height: calc(100vh - 20px);
-  overflow-y: auto;
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
+.login-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    gap: 10px;
 }
 
-.input-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 15px;
+.login-form > div > input {
+    width: 140px;
+    margin-left: 20px;
 }
 
-.input-row label,
-.input-row input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-right: 10px;
+.login-form .input-field-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
 }
 
-input {
-  margin-right:30px;
+form a {
+    color: darkblue;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
-.input-row label:last-child,
-.input-row input:last-child {
-  margin-right: 0;
+form span {
+    margin-top: 20px;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
 }
 
-.form-container input[type='checkbox'] {
-  margin-right: 5px;
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-.form-container label {
-  margin-bottom: 10px;
-  font-weight: bold;
-  display: block;
+.login-form button {
+    margin-top: 30px;
 }
 
-.submit {
-  margin-left: 20%; // todo: center properly
+.hidden {
+    position: absolute;
+    display: none;
 }

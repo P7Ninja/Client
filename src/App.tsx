@@ -8,78 +8,50 @@ import Health from './containers/Health/Health'
 import Inventory from './containers/Inventory/Inventory';
 
 import './App.scss'
+import { useState, createContext, useEffect } from 'react';
+import { UserService, UserInfo } from './Services/UserService';
+
+
+export type UserContextValue = {
+  user: UserInfo | null,
+  setUser: ((user: UserInfo | null) => void) | null,
+}
+export const UserContext = createContext<UserContextValue>({user: null, setUser: null});
 
 function App() {
+  const [user, setUser] = useState<UserInfo | null>(null);
+  useEffect(() => {
+    const getUser = async () => {
+      const u = await new UserService().GetUser();
+      setUser(u);
+    }
+    getUser();
+  }, []);
+  
   return (
     <>
-      {/* <Login></Login> */}
-      <Router>
-        <Sidebar />
-        <div className='container'>
-          <Routes>
-            <Route path="user" element={<User />} />
-            <Route path="mealplans" element={<MealPlans />} />
-            <Route path="inventory" element={<Inventory />} />
-            <Route path="health" element={<Health />} />
-          </Routes>
-        </div>
-      </Router>
+      <UserContext.Provider value={{user, setUser}}>
+          <Router>
+            <Sidebar />
+            <div className='container'>
+              {user == null && (
+                <User />
+              )}
+              {user != null && (
+                <Routes>
+                  <Route path="user" element={<User />} />
+                  <Route path="mealplans" element={<MealPlans />} />
+                  <Route path="/" element={<MealPlans />} />
+                  <Route path="inventory" element={<Inventory />} />
+                  <Route path="health" element={<Health />} />
+                </Routes>
+              )}
+            </div>
+          </Router>
+      </UserContext.Provider>
     </>
   )
 }
 
+
 export default App
-
-// function Login() {
-//   const [username, setUsername] = useState("")
-//   const [password, setPassword] = useState("")
-//   const [mail, setMail] = useState("")
-//   const [gender, setGender] = useState("")
-//   const [birthdate, setBirthdate] = useState("1999-01-01")
-//   const [isCreatingUser, setIsCreatingUser] = useState(false)
-  
-
-//   if (!isCreatingUser) {
-//     return (
-//       <>
-//         <p>{gender}</p>
-//         <form onSubmit={e => e.preventDefault()}>
-//           <h1>Log ind</h1>
-//           <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Brugernavn'required/>
-//           <br/>
-//           <input type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder='Adgangskode' required/>
-//           <br/>
-//           <button type='submit'>Log ind</button>
-//           <br/>
-//           <a onClick={() => setIsCreatingUser(true)}>Opret ny bruger</a>
-//         </form>
-//       </>
-//     )
-//   }
-//   else {
-//     return (
-//       <>
-//         <form onSubmit={e => e.preventDefault()}>
-//           <h1>Ny bruger</h1>
-//           <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Brugernavn' required/>
-//           <br/>
-//           <input type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder='Adgangskode' required/>
-//           <br/>
-//           <input type='email' value={mail} onChange={e => setMail(e.target.value)} placeholder='Email adresse' required/>
-//           <br/>
-//           <label>Fødselsdato</label>
-//           <br/>
-//           <input type='date' value={birthdate} onChange={e => setBirthdate(e.target.value)} required/>
-//           <br/>
-//           <input type='radio' name='gender' id='male' onClick={() => setGender("male")} required></input>
-//           <label htmlFor="male">Mand</label>
-//           <input type='radio' name='gender' id='female' onClick={() => setGender("female")} required></input>
-//           <label htmlFor='female'>Kvinde</label>
-//           <button type='submit'>Opret bruger</button>
-//           <br/>
-//           <a onClick={() => setIsCreatingUser(false)}>Tilbage til login</a>
-//         </form>
-//       </>
-//     )
-//   }
-// }
