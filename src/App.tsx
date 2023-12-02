@@ -34,18 +34,18 @@ function App() {
           <Router>
             <Sidebar />
             <div className='container'>
-              {user == null && (
+              {/* {user == null && (
                 <User />
-              )}
-              {user != null && (
-                <Routes>
-                  <Route path="user" element={<User />} />
-                  <Route path="mealplans" element={<MealPlans />} />
-                  <Route path="/" element={<MealPlans />} />
-                  <Route path="inventory" element={<Inventory />} />
-                  <Route path="health" element={<Health />} />
-                </Routes>
-              )}
+              )} */}
+              {/* {user != null && ( */}
+              <Routes>
+                <Route path="user" element={<User />} />
+                <Route path="mealplans" element={<MealPlans />} />
+                <Route path="/" element={<MealPlans />} />
+                <Route path="inventory" element={<Inventory />} />
+                <Route path="health" element={<Health />} />
+              </Routes>
+             {/* )} */}
             </div>
           </Router>
       </UserContext.Provider>
