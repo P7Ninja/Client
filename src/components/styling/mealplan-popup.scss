@@ -1,4 +1,10 @@
 
+
+.popup-content {
+    width: 15%;
+    border-color:rgb(201, 201, 201);
+    border-width: 0.2rem;
+}
 .modal {
     font-size: 12px;
 }
@@ -14,10 +20,10 @@
     padding: 10px 5px;
 }
 .modal > .actions {
-width: 100%;
-padding: 10px 5px;
-margin: auto;
-text-align: center;
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
 }
 .modal > .close {
     cursor: pointer;
@@ -31,6 +37,6 @@ text-align: center;
     background: #ffffff;
     border-radius: 18px;
     border: 1px solid #cfcece;
-    }
+}
 
 

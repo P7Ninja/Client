@@ -18,3 +18,28 @@
 // .container {
 //   width: 100vh;
 // }
+
+.form-container {
+    max-width: 500px;
+    border-radius: 12px;
+    background-color: #00000005;
+    border: 1px solid #00000010;
+    padding: 16px;
+    box-shadow: 0 5px 10px #0001;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .input-group {
+    display: flex !important;
+    gap: 10px !important;
+  }
+  
+  .form-container :is(input, select, button) {
+    font-size: 1rem;
+  }
+  

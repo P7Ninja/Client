@@ -57,51 +57,49 @@ const GenerateMealplanPopup: React.FC = () => {
                     <button className='close' onClick={close}>
                         &times;
                     </button>
-                    <div className="generateMealPlanContent">
                     <form onSubmit={handleSubmit} className="form-container">
-                    <label htmlFor="calories">Calories</label>
-                    <input className="mealplanGeneration"
-                    type="number"
-                    name="calories"
-                    value={formData.calories}
-                    onChange={handleNumberChange}
-                    placeholder="Calories"
-                    />
-                    <label htmlFor="protein">Protein</label>
-                    <input className="mealplanGeneration"
-                    type="number"
-                    name="protein"
-                    value={formData.protein}
-                    onChange={handleNumberChange}
-                    placeholder="Protein"
-                    />
-                    <label htmlFor="carbs">Carbohydrates</label>
-                    <input className="mealplanGeneration"
-                    type="number"
-                    name="carbs"
-                    value={formData.carbs}
-                    onChange={handleNumberChange}
-                    placeholder="Carbohydrates"
-                    />
-                    <label htmlFor="fat">Fats</label>
-                    <input className="mealplanGeneration"
-                    type="number"
-                    name="fat"
-                    value={formData.fat}
-                    onChange={handleNumberChange}
-                    placeholder="Fat"
-                    />
-                    <label htmlFor="days">Days</label>
-                    <input className="mealplanGeneration"
-                    type="number"
-                    name="days"
-                    value={formData.days}
-                    onChange={handleNumberChange}
-                    placeholder="Days"
-                    />
-                    <button type="submit">Generate meal plan</button>
-                </form>
-                    </div>
+                        <label htmlFor="calories">Calories</label>
+                        <input className="mealplanGeneration"
+                            type="number"
+                            name="calories"
+                            value={formData.calories}
+                            onChange={handleNumberChange}
+                            placeholder="Calories"
+                        />
+                        <label htmlFor="protein">Protein</label>
+                        <input className="mealplanGeneration"
+                            type="number"
+                            name="protein"
+                            value={formData.protein}
+                            onChange={handleNumberChange}
+                            placeholder="Protein"
+                        />
+                        <label htmlFor="carbs">Carbohydrates</label>
+                        <input className="mealplanGeneration"
+                            type="number"
+                            name="carbs"
+                            value={formData.carbs}
+                            onChange={handleNumberChange}
+                            placeholder="Carbohydrates"
+                        />
+                        <label htmlFor="fat">Fats</label>
+                        <input className="mealplanGeneration"
+                            type="number"
+                            name="fat"
+                            value={formData.fat}
+                            onChange={handleNumberChange}
+                            placeholder="Fat"
+                        />
+                        <label htmlFor="days">Days</label>
+                        <input className="mealplanGeneration"
+                            type="number"
+                            name="days"
+                            value={formData.days}
+                            onChange={handleNumberChange}
+                            placeholder="Days"
+                        />
+                        <button type="submit">Generate meal plan</button>
+                    </form>
                 </div>
             )}
         </Popup>
