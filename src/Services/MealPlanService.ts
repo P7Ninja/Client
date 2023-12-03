@@ -20,11 +20,12 @@ export interface IMealPlanService {
 }
   
 export class MealPlanService implements IMealPlanService {
-    private baseUrl = "http://localhost:3005";
+    private baseUrl = "http://mealplanservice:7004";
 
     async GetMealPlans(): Promise<MealPlan[]> {
-      return await fetch(`${this.baseUrl}/mealPlans/1`, {
-        method: 'GET'
+      return await fetch(`${this.baseUrl}/mealPlans`, {
+        method: 'GET',
+        headers: JwtService.getDefaultHeader()
       }).then((res) => res.json());
 
 

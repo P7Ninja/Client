@@ -20,14 +20,6 @@ const GenerateMealplanPopup: React.FC = () => {
         days: 0
     });
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type, checked } = event.target;
-        setFormData({
-        ...formData,
-        [name]: type === 'checkbox' ? checked : value,
-        });
-    };
-
     const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormData({
@@ -52,56 +44,56 @@ const GenerateMealplanPopup: React.FC = () => {
                 borderRadius: '30px',
             }}
         >
-            {(close: any) => (
-                <div className="modal">
-                    <button className='close' onClick={close}>
-                        &times;
-                    </button>
-                    <form onSubmit={handleSubmit} className="form-container">
-                        <label htmlFor="calories">Calories</label>
-                        <input className="mealplanGeneration"
-                            type="number"
-                            name="calories"
-                            value={formData.calories}
-                            onChange={handleNumberChange}
-                            placeholder="Calories"
-                        />
-                        <label htmlFor="protein">Protein</label>
-                        <input className="mealplanGeneration"
-                            type="number"
-                            name="protein"
-                            value={formData.protein}
-                            onChange={handleNumberChange}
-                            placeholder="Protein"
-                        />
-                        <label htmlFor="carbs">Carbohydrates</label>
-                        <input className="mealplanGeneration"
-                            type="number"
-                            name="carbs"
-                            value={formData.carbs}
-                            onChange={handleNumberChange}
-                            placeholder="Carbohydrates"
-                        />
-                        <label htmlFor="fat">Fats</label>
-                        <input className="mealplanGeneration"
-                            type="number"
-                            name="fat"
-                            value={formData.fat}
-                            onChange={handleNumberChange}
-                            placeholder="Fat"
-                        />
-                        <label htmlFor="days">Days</label>
-                        <input className="mealplanGeneration"
-                            type="number"
-                            name="days"
-                            value={formData.days}
-                            onChange={handleNumberChange}
-                            placeholder="Days"
-                        />
-                        <button type="submit">Generate meal plan</button>
-                    </form>
-                </div>
-            )}
+
+            <div className="modal">
+                <button className='close' onClick={close}>
+                    &times;
+                </button>
+                <form onSubmit={handleSubmit} className="form-container">
+                    <label htmlFor="calories">Calories</label>
+                    <input className="mealplanGeneration"
+                        type="number"
+                        name="calories"
+                        value={formData.calories}
+                        onChange={handleNumberChange}
+                        placeholder="Calories"
+                    />
+                    <label htmlFor="protein">Protein</label>
+                    <input className="mealplanGeneration"
+                        type="number"
+                        name="protein"
+                        value={formData.protein}
+                        onChange={handleNumberChange}
+                        placeholder="Protein"
+                    />
+                    <label htmlFor="carbs">Carbohydrates</label>
+                    <input className="mealplanGeneration"
+                        type="number"
+                        name="carbs"
+                        value={formData.carbs}
+                        onChange={handleNumberChange}
+                        placeholder="Carbohydrates"
+                    />
+                    <label htmlFor="fat">Fats</label>
+                    <input className="mealplanGeneration"
+                        type="number"
+                        name="fat"
+                        value={formData.fat}
+                        onChange={handleNumberChange}
+                        placeholder="Fat"
+                    />
+                    <label htmlFor="days">Days</label>
+                    <input className="mealplanGeneration"
+                        type="number"
+                        name="days"
+                        value={formData.days}
+                        onChange={handleNumberChange}
+                        placeholder="Days"
+                    />
+                    <button type="submit">Generate meal plan</button>
+                </form>
+            </div>
+      
         </Popup>
     );
 }
