@@ -1,34 +1,46 @@
 import { JwtService } from "./JwtService";
-
-export type MealPlan = {
-    planID: number;
-    startDate: string;
-    endDate: string;
-    days: days[];
-};
-
-export type days = {
-  totalCalories: number;
-  totalProtein: number;
-  totalCarbohydrates: number;
-  totalFat: number;
-  recipes: [];
-}
+import { MealPlan, GenerateMealPlan } from "../schemas";
 
 export interface IMealPlanService {
     GetMealPlans(): Promise<MealPlan[]>;
+    PostGenerateMealPlan(generateMeal: GenerateMealPlan): Promise<Response>;
 }
   
 export class MealPlanService implements IMealPlanService {
-    private baseUrl = "http://mealplanservice:7004";
+    private baseUrl = "/api";
 
     async GetMealPlans(): Promise<MealPlan[]> {
-      return await fetch(`${this.baseUrl}/mealPlans`, {
-        method: 'GET',
-        headers: JwtService.getDefaultHeader()
-      }).then((res) => res.json());
-
-
+      try {
+        const response = await fetch(`${this.baseUrl}/mealPlan/all`, {
+          method: 'GET',
+          headers: JwtService.getDefaultHeader(),
+        });
+    
+        const data = await response.json();
+        console.log('API Response:', data);
+    
+        return data;
+      } catch (error) {
+        console.error('Error fetching meal plans:', error);
+        throw error; 
+      }
     }
+
+    async PostGenerateMealPlan(generateMeal: GenerateMealPlan): Promise<Response> {
+      const headers = JwtService.getDefaultHeader();
+      headers.append('Content-Type', 'application/json');
+    
+      const body = JSON.stringify({
+        targets: generateMeal.targets,
+        split_days: generateMeal.split_days,
+      });
+    
+      return await fetch(`${this.baseUrl}/generate`, {
+        method: "POST",
+        headers: headers,
+        body: body,
+      });
+    }
+    
   }
   

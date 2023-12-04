@@ -2,6 +2,10 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 import Popup from 'reactjs-popup';
 import '../styling/mealplan-popup.scss'
 import './generate-mealplan-popup.scss'
+import { MealPlanService, IMealPlanService } from '../../Services/MealPlanService';
+import { GenerateMealPlan } from '../../schemas';
+
+const mealPlanService: IMealPlanService = new MealPlanService();
 
 type FormState = {
     calories: number;
@@ -30,8 +34,22 @@ const GenerateMealplanPopup: React.FC = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(formData);
-        
+
+        const targets = [formData.calories, formData.protein, formData. carbs, formData.fat]
+        var split_days = [0.33, 0.33, 0.33]
+
+        // Add 3 values of 0.33 to split_days per day (we do this because we have not implemented user input of split_days)
+        for(let i = 1; i < formData.days; i++) {
+            for (let l = 0; l < 3; l++) {
+                split_days.push(0.33)
+            }
+        } 
+
+        const generateMealPlan: GenerateMealPlan = {
+            targets: targets,
+            split_days: split_days,
+        };
+        mealPlanService.PostGenerateMealPlan(generateMealPlan);
     };
     
     return(
