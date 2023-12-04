@@ -15,6 +15,11 @@ export function UserSettings() {
         <h1>Account</h1>
         <h3>{context.user?.username}</h3>
         <p>{context.user?.email}</p>
+        <strong>Targets:</strong>
+        <p>{context.user?.target_energy.calories} kcal</p>
+        <p>Protein: {context.user?.target_energy.protein} g.</p>
+        <p>Carbs: {context.user?.target_energy.carbohydrates} g.</p>
+        <p>Fat: {context.user?.target_energy.fat} g.</p>
         <button onClick={signout}>Sign out</button>
     </>
 }

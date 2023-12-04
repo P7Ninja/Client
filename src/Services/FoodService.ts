@@ -20,7 +20,7 @@ export interface IFoodService {
 }
 
 export class FoodService implements IFoodService {
-    private baseUrl = "http://localhost:8001";
+    private baseUrl = "/api";
     async GetFoods(idList: number[]): Promise<Food[]> {
         const headers = JwtService.getDefaultHeader();
         headers.append('content-type', 'application/json');
