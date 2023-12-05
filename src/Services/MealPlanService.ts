@@ -4,6 +4,7 @@ import { MealPlan, GenerateMealPlan } from "../schemas";
 export interface IMealPlanService {
     GetMealPlans(): Promise<MealPlan[]>;
     PostGenerateMealPlan(generateMeal: GenerateMealPlan): Promise<Response>;
+    DeleteMealPlan(planID: number): Promise<Response>;
 }
   
 export class MealPlanService implements IMealPlanService {
@@ -41,6 +42,15 @@ export class MealPlanService implements IMealPlanService {
         body: body,
       });
     }
-    
+
+    async DeleteMealPlan(planID: number): Promise<Response> {
+      const headers = JwtService.getDefaultHeader();
+      headers.append('content-type', 'application/json');
+      return await fetch(`${this.baseUrl}/mealPlan/${planID}`,
+      { 
+          method: "Delete",
+          headers: headers
+      })
+    }  
   }
   
