@@ -13,7 +13,7 @@ export type InventoryItem = {
     foodId: number,
     expirationDate: string,
     timestamp: string,
-    food: Food | null
+    food: Food
 }
 
 export interface IInventoryService {
@@ -25,7 +25,7 @@ export interface IInventoryService {
 }
 
 export class InventoryService implements IInventoryService {
-    private baseUrl = "http://localhost:8001";
+    private baseUrl = "/api";
     async GetAllForUser(): Promise<Inventory[]> {
         return await fetch(`${this.baseUrl}/inventories`,
             {
@@ -51,7 +51,7 @@ export class InventoryService implements IInventoryService {
         return await fetch(`${this.baseUrl}/inventories/${invId}`,
         {
             method: "POST",
-            body: JSON.stringify({ "foodId": foodId, "expirationDate": expirationDate }),
+            body: JSON.stringify({ "foodId": foodId, "expirationDate": expirationDate}),
             headers: headers
         });
     }

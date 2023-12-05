@@ -39,7 +39,7 @@ function App() {
               )}
               {user != null && (
                 <Routes>
-                  <Route path="user" element={<User />} />
+                  <Route path="account" element={<User />} />
                   <Route path="mealplans" element={<MealPlans />} />
                   <Route path="/" element={<MealPlans />} />
                   <Route path="inventory" element={<Inventory />} />

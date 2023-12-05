@@ -37,7 +37,7 @@ interface IUserService {
 }
 
 export class UserService implements IUserService {
-    private baseUrl = "http://127.0.0.1:8001"
+    private baseUrl = "/api"
     SignOut(): void {
         JwtService.ClearJwt();
     }
