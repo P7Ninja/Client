@@ -12,3 +12,12 @@
     border: 1px solid #cfcece;
 }
 
+.popup-content {
+    width: fit-content;
+}
+
+@media (max-width: 530px) {
+    popup {
+        width: 100%;
+    }
+}

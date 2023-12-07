@@ -64,9 +64,6 @@ const GenerateMealplanPopup: React.FC = () => {
         >
 
             <div className="modal">
-                <button className='close' onClick={close}>
-                    &times;
-                </button>
                 <form onSubmit={handleSubmit} className="form-container">
                     <label htmlFor="calories">Calories</label>
                     <input className="mealplanGeneration"
