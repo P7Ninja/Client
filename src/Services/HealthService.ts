@@ -28,19 +28,19 @@ export interface IHealthService {
 
 
 export class HealthService implements IHealthService {
-    private baseUrl = "http://localhost:8001";
     private headers = JwtService.getDefaultHeader();
+    
     async GetHealth(): Promise<HealthEntry[]> {
-        return await fetch(`${this.baseUrl}/api/health/history`,
+        return await fetch(`/api/health/history`,
         {
-            method: "Get",
+            method: "GET",
             headers: this.headers
         }
         ).then(res => res.json());
     }
 
     async PostHealth(health: Health): Promise<Health> {
-        return await fetch(`${this.baseUrl}/api/health`,
+        return await fetch(`/api/health`,
             {
                 method: "POST", body: JSON.stringify(health),
                 headers: this.headers
@@ -49,7 +49,7 @@ export class HealthService implements IHealthService {
     }
 
     async DeleteHealth(id: number): Promise<void> {
-        await fetch(`${this.baseUrl}/api/health/` + id, 
+        await fetch(`/api/health/` + id, 
         { 
             method: "DELETE",
             headers: this.headers 

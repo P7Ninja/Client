@@ -20,11 +20,11 @@ export interface IFoodService {
 }
 
 export class FoodService implements IFoodService {
-    private baseUrl = "http://localhost:8001";
+    // private baseUrl = "http://127.0.0.1";
     async GetFoods(idList: number[]): Promise<Food[]> {
         const headers = JwtService.getDefaultHeader();
         headers.append('content-type', 'application/json');
-        return await fetch(`${this.baseUrl}/foods/list`,
+        return await fetch(`/api/foods/list`,
             {
                 method: "POST", body: JSON.stringify(idList),
                 headers: headers
@@ -33,6 +33,6 @@ export class FoodService implements IFoodService {
     }
 
     async GetAll(query: string): Promise<Food[]> {
-        return await fetch(`${this.baseUrl}/foods?query=${query}`).then(res => res.json());
+        return await fetch(`/api/foods?query=${query}`).then(res => res.json());
     }
 }
