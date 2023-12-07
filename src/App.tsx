@@ -38,14 +38,14 @@ function App() {
                 <User />
               )}
               {user != null && (
-              <Routes>
-                <Route path="user" element={<User />} />
-                <Route path="mealplans" element={<MealPlans />} />
-                <Route path="/" element={<MealPlans />} />
-                <Route path="inventory" element={<Inventory />} />
-                <Route path="health" element={<Health />} />
-              </Routes>
-            )}
+                <Routes>
+                  <Route path="account" element={<User />} />
+                  <Route path="mealplans" element={<MealPlans />} />
+                  <Route path="/" element={<MealPlans />} />
+                  <Route path="inventory" element={<Inventory />} />
+                  <Route path="health" element={<Health />} />
+                </Routes>
+              )}
             </div>
           </Router>
       </UserContext.Provider>

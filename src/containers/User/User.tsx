@@ -3,6 +3,7 @@ import './User.scss';
 import { UserContext } from '../../App';
 import { UserSettings } from './UserSettings';
 import { UserService } from '../../Services/UserService';
+import { useNavigate } from 'react-router-dom';
 
 export type FormState = {
   username: string;
@@ -41,6 +42,7 @@ function CreateAccount(props: CreateAccountProps) {
   const userservice = new UserService();
   const [msg, setMsg] = useState("");
   const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<FormState>({
     username: '',
     password: '',
@@ -67,7 +69,7 @@ function CreateAccount(props: CreateAccountProps) {
     const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name]: value ? parseInt(value, 10) : 0,
+      [name]: parseInt(value, 10),
     });
   };
 
@@ -78,7 +80,7 @@ function CreateAccount(props: CreateAccountProps) {
       setPage(1);
       return;
     }
-
+    setLoading(true);
     const res = await userservice.CreateUser(formData);
     if (res.ok) {
       props.gotoLogin();
@@ -87,6 +89,7 @@ function CreateAccount(props: CreateAccountProps) {
       const details = (await res.json()).detail;
       setMsg(details);
     }
+    setLoading(false);
   }
 
   return <>
@@ -95,6 +98,7 @@ function CreateAccount(props: CreateAccountProps) {
     <form id='form' onSubmit={handleSubmit}>
       <div className={page != 0 ? "hidden" : "login-form"}>
         <h2 style={{ margin: "10px 0 0 0" }}>Account information</h2>
+        <label>Username</label>
         <input
           type="text"
           name="username"
@@ -103,6 +107,7 @@ function CreateAccount(props: CreateAccountProps) {
           placeholder="Username"
           required
         />
+        <label>Password</label>
         <input
           type="password"
           name="password"
@@ -111,6 +116,7 @@ function CreateAccount(props: CreateAccountProps) {
           placeholder="Password"
           required
         />
+        <label>Email</label>
         <input
           type="email"
           name="email"
@@ -119,6 +125,7 @@ function CreateAccount(props: CreateAccountProps) {
           placeholder="Email"
           required
         />
+        <label>City</label>
         <input
           type="text"
           name="city"
@@ -176,17 +183,18 @@ function CreateAccount(props: CreateAccountProps) {
         <button type="submit">Next</button>
       </div>
       <div className={page != 1 ? "hidden" : "login-form"}>
-        <a onClick={() => setPage(0)}>↩ Back</a>
+        <a onClick={() => setPage(0)}>◀ Back</a>
         <h2 style={{ margin: "10px 0 0 0" }}>Energy targets</h2>
         <div className='input-field-container'>
           Calories
           <input
             type="number"
             name="calories"
-            value={formData.calories}
+            value={formData.calories || ''}
             onChange={handleNumberChange}
             placeholder="Calories"
             min="0"
+            required={page == 1}
           />
         </div>
         <div className='input-field-container'>
@@ -194,10 +202,11 @@ function CreateAccount(props: CreateAccountProps) {
           <input
             type="number"
             name="protein"
-            value={formData.protein}
+            value={formData.protein || ''}
             onChange={handleNumberChange}
             placeholder="Protein (g)"
             min="0"
+            required={page == 1}
           />
         </div>
         <div className='input-field-container'>
@@ -205,10 +214,11 @@ function CreateAccount(props: CreateAccountProps) {
           <input
             type="number"
             name="carbs"
-            value={formData.carbs}
+            value={formData.carbs || ''}
             onChange={handleNumberChange}
             placeholder="Carbs (g)"
             min="0"
+            required={page == 1}
           />
         </div>
         <div className='input-field-container'>
@@ -216,14 +226,15 @@ function CreateAccount(props: CreateAccountProps) {
           <input
             type="number"
             name="fat"
-            value={formData.fat}
+            value={formData.fat || ''}
             onChange={handleNumberChange}
             placeholder="Fat (g)"
             min="0"
+            required={page == 1}
           />
         </div>
         {msg != "" && <p style={{ margin: "0 0", color: "red" }}>{msg}.</p>}
-        <button type="submit">Sign up</button>
+        <button type="submit">{loading ? "Creating account..." : "Sign up"}</button>
       </div>
       <span>Already have an account? <a onClick={props.gotoLogin}>Log in</a></span>
     </form>
@@ -237,22 +248,27 @@ interface LoginProps {
 function Login(props: LoginProps) {
   const userservice = new UserService();
   const context = useContext(UserContext);
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [msg, setMsg] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
     const res = await userservice.Login(username, password)
     if (res.ok) {
       context.setUser?.(await userservice.GetUser());
+      navigate("/")
     }
     else {
       const details = (await res.json()).detail;
       setMsg(details);
     }
     setPassword("");
+    setLoading(false);
   }
 
 
@@ -260,12 +276,14 @@ function Login(props: LoginProps) {
     <>
       <h1>Log in</h1>
       <form onSubmit={handleSubmit} className='login-form'>
-        <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Username' required />
+        <label>Username</label>
+        <input type='text' value={username} onChange={e => setUsername(e.target.value)} required />
         <br />
-        <input type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' required />
+        <label>Password</label>
+        <input type='password' value={password} onChange={e => setPassword(e.target.value)} required />
         <br />
         {msg != "" && <p style={{ margin: "0 0", color: "red" }}>{msg}.</p>}
-        <button type='submit'>Log in</button>
+        <button type='submit'>{loading ? "Logging in..." : "Log in"}</button>
         <br />
         <span>Don't have an account yet? <a onClick={props.gotoCreateAccount}>Sign up</a></span>
 
