@@ -37,7 +37,6 @@ interface IUserService {
 }
 
 export class UserService implements IUserService {
-    private baseUrl = "/api"
     SignOut(): void {
         JwtService.ClearJwt();
     }
@@ -45,7 +44,7 @@ export class UserService implements IUserService {
         const targets: Targets = { calories: form.calories, protein: form.protein, fat: form.fat, carbohydrates: form.carbs }
         const createUserForm: CreateUserForm = { username: form.username, email: form.email, password: form.password, birthday: form.birthdate, city: form.city, gender: form.gender, target_energy: targets, useFoodWasteDiscounts: form.useFoodWasteDiscounts }
 
-        return await fetch(`${this.baseUrl}/user`,
+        return await fetch(`/user`,
             {
                 method: "POST",
                 body: JSON.stringify(createUserForm),
@@ -53,7 +52,7 @@ export class UserService implements IUserService {
             });
     }
     async Login(username: string, password: string): Promise<Response> {
-        const res = await fetch(`${this.baseUrl}/login`,
+        const res = await fetch(`/api/login`,
             {
                 method: "POST",
                 body: `username=${username}&password=${password}`,
@@ -68,7 +67,7 @@ export class UserService implements IUserService {
     }
 
     async GetUser(): Promise<UserInfo | null> {
-        const res = await fetch(`${this.baseUrl}/user`,
+        const res = await fetch(`/api/user`,
             {
                 headers: JwtService.getDefaultHeader()
             });

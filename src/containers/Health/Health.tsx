@@ -1,44 +1,51 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent  } from 'react';
+import { HealthService } from '../../Services/HealthService';
+import LineChart from './InteractiveGraph';
 
-type FormState = {
-    Date: string;
-    Height: number;
-    Weight: number;
-    FatPercentage: number;
-    MusclePercentage: number;
-    WaterPercentage: number;
+const healthService = new HealthService();
+
+
+type Health = {
+    dateStamp: Date;
+    height: number;
+    weight: number;
+    fatPercentage: number;
+    musclePercentage: number;
+    waterPercentage: number;
+};
+
+type HealthEntry = {
+    id: number;
+    userID: number;
+    dateStamp: Date;
+    height: number;
+    weight: number;
+    fatPercentage: number;
+    musclePercentage: number;
+    waterPercentage: number;
 };
 
 const Health = () => {
-    const [formData, setFormData] = useState<FormState>({
-        Date: '',
-        Height: 0,
-        Weight: 0,
-        FatPercentage: 0,
-        MusclePercentage: 0,
-        WaterPercentage: 0,
+    const [formData, setFormData] = useState<Health>({
+        dateStamp: new Date(),
+        height: 0,
+        weight: 0,
+        fatPercentage: 0,
+        musclePercentage: 0,
+        waterPercentage: 0,
     });
 
     const [id, setID] = useState<number>(0);
 
-    const [lastEntry, setGetLastEntry] = useState<FormState>({
-        Date: 'test',
-        Height: 0,
-        Weight: 0,
-        FatPercentage: 0,
-        MusclePercentage: 0,
-        WaterPercentage: 0,
-    });
+    const [entries, setEntries] = useState<HealthEntry[]>([]);
 
-    var [entries, setGetEntries] = useState<FormState[]>([{Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0}]);
-    
-    const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value, // value is a string in the format "YYYY-MM-DD"
-        });
-    };
+    const [label, setLabel] = useState<string>("height");
+
+    const handleLabel = (event: ChangeEvent<HTMLSelectElement>) => {
+        handleGetEntries();
+        const { value } = event.target;
+        setLabel(value);
+    }
     
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -48,156 +55,138 @@ const Health = () => {
         });
     };
     
-    const handleIDChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleIDChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
         setID(parseInt(value));
     }
     
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(formData);
-
-        // insert post request here
+        formData.dateStamp = new Date();
+        const res = await healthService.PostHealth(formData).then((data => data));
     };
 
     // this needs id from a given entry instead of from an input field
     const handleDelete = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("Deleting entry with id: " + id);
-        
-        // insert delete request here
-    };
- 
-    const handleGetLastEntry = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        
-        console.log("Getting last entry");
-        
-        // replace below with get request
-        lastEntry.Date = "tests";
-        lastEntry.Height = 1;
-        lastEntry.Weight = 2;
-        lastEntry.FatPercentage = 3;
-        lastEntry.MusclePercentage = 4;
-        lastEntry.WaterPercentage = 5;
-        // end of replace
-
-        setGetLastEntry(lastEntry);
-        document.getElementById("Date")!.innerHTML = "Date: " + lastEntry.Date;
-        document.getElementById("Height")!.innerHTML = "Height: " + lastEntry.Height;
-        document.getElementById("Weight")!.innerHTML = "Weight: " + lastEntry.Weight;
-        document.getElementById("FatPercentage")!.innerHTML = "Fat Percentage: " + lastEntry.FatPercentage;
-        document.getElementById("MusclePercentage")!.innerHTML = "Muscle Percentage: " + lastEntry.MusclePercentage;
-        document.getElementById("WaterPercentage")!.innerHTML = "Water Percentage: " + lastEntry.WaterPercentage;          
+        const res = await healthService.DeleteHealth(id).then((data => data));
     };
 
-    const handleGetEntries = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        
-
-        // replace below with get request
-        entries = [//{Date: 'test', Height: 0, Weight: 0, FatPercentage: 0, MusclePercentage: 0, WaterPercentage: 0},
-                   {Date: 'test2', Height: 1, Weight: 1, FatPercentage: 1, MusclePercentage: 1, WaterPercentage: 1},
-                   {Date: 'test3', Height: 2, Weight: 2, FatPercentage: 2, MusclePercentage: 2, WaterPercentage: 2}];
-        // end of replace
-
-        setGetEntries(entries);
-        
+    const handleGetEntries = async () => {
+        const res = await healthService.GetHealth().then((data => data));
+        setTimeout(async () => {
+            setEntries(res);
+        });
     };
+
+    const getChartData = () => {
+        var chartData = {
+            labels: getGraphDates(),
+            datasets: [
+              {
+                label: label,
+                data: getGraphValues(),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1,
+              },
+            ],
+          };
+        return chartData;
+    }
+
+    const getGraphDates = () => {
+        var dates = entries.map(i => i.dateStamp);
+        return dates;
+    }
+
+    const getGraphValues = () => {
+        var values: number[] = [];
+        if (label == "height")
+            values = entries.map(i => i.height);
+        else if (label == "weight")
+            values = entries.map(i => i.weight);
+        else if (label == "fat")
+            values = entries.map(i => i.fatPercentage);
+        else if (label == "muscle")
+            values = entries.map(i => i.musclePercentage);
+        else if (label == "water")
+            values = entries.map(i => i.waterPercentage);
+        return values;
+    }
+
+  return (
+    <>
+        <script onLoad={() => handleGetEntries}></script>
+      <h1>Health Graph</h1>
+
+      <select onChange={(event: ChangeEvent<HTMLSelectElement>) => {handleLabel(event); getChartData()}}>
+        <option value="height">Height</option>
+        <option value="weight">Weight</option>
+        <option value="fat">Fat</option>
+        <option value="muscle">Muscle</option>
+        <option value="water">Water</option>
+      </select>
+
+      <LineChart data={getChartData()} />
     
-
-    return <>
-    <h1>Health</h1>
-        <form onSubmit={handleSubmit} className="formContainer">
-        <label htmlFor="Date">Date</label>
-        <input
-            type="date"
-            name="Date"
-            value={formData.Date}
-            onChange={handleDateChange}
-         />
-        <label htmlFor="Height">Height</label>
-        <input
-            type="number"
-            name="Height"
-            value={formData.Height}
-            onChange={handleInputChange}
-            placeholder="cm"
-            />
-        <label htmlFor="Weight">Weight</label>
-        <input
-            type="number"
-            name="Weight"
-            value={formData.Weight}
-            onChange={handleInputChange}
-            placeholder="kg"
-            />
-        <label htmlFor="FatPercentage">Fat Percentage</label>
-        <input
-            type="number"
-            name="FatPercentage"
-            value={formData.FatPercentage}
-            onChange={handleInputChange}
-            placeholder="%"
-            />
-        <label htmlFor="MusclePercentage">Muscle Percentage</label>
-        <input
-            type="number"
-            name="MusclePercentage"
-            value={formData.MusclePercentage}
-            onChange={handleInputChange}
-            placeholder="%"
-            />
-        <label htmlFor="WaterPercentage">Water Percentage</label>
-        <input
-            type="number"
-            name="WaterPercentage"
-            value={formData.WaterPercentage}
-            onChange={handleInputChange}
-            placeholder="%"
-            />
-         <button type="submit">Add Item</button>
-        </form>
-        <form onSubmit={handleDelete} className="formContainer">
-            <label htmlFor="id">ID</label>
+        <h1>Health</h1>
+            <form onSubmit={handleSubmit} className="form-container">
+            <h2>Add Entry</h2>
+            <label htmlFor="height">height</label>
             <input
                 type="number"
-                name="id"
-                value={id}
-                onChange={handleIDChange}
-                placeholder="ID"
+                name="height"
+                value={formData.height}
+                onChange={handleInputChange}
+                placeholder="cm"
                 />
-            <button type="submit">Delete Item</button>
-        </form>
-        <form onSubmit={handleGetLastEntry} className="formContainer">
-            <button type="submit">Get Last Entry</button>
-            <br/>
-            <form className="formContainer">
-                <p id="Date">Date: {lastEntry.Date}</p>
-                <p id="Height">Height: {lastEntry.Height}</p>
-                <p id="Weight">Weight: {lastEntry.Weight}</p>
-                <p id="FatPercentage">Fat Percentage: {lastEntry.FatPercentage}</p>
-                <p id="MusclePercentage">Muscle Percentage: {lastEntry.MusclePercentage}</p>
-                <p id="WaterPercentage">Water Percentage: {lastEntry.WaterPercentage}</p>
+            <label htmlFor="weight">weight</label>
+            <input
+                type="number"
+                name="weight"
+                value={formData.weight}
+                onChange={handleInputChange}
+                placeholder="kg"
+                />
+            <label htmlFor="fatPercentage">Fat Percentage</label>
+            <input
+                type="number"
+                name="fatPercentage"
+                value={formData.fatPercentage}
+                onChange={handleInputChange}
+                placeholder="%"
+                />
+            <label htmlFor="musclePercentage">Muscle Percentage</label>
+            <input
+                type="number"
+                name="musclePercentage"
+                value={formData.musclePercentage}
+                onChange={handleInputChange}
+                placeholder="%"
+                />
+            <label htmlFor="waterPercentage">Water Percentage</label>
+            <input
+                type="number"
+                name="waterPercentage"
+                value={formData.waterPercentage}
+                onChange={handleInputChange}
+                placeholder="%"
+                />
+            <button type="submit">Add Item</button>
             </form>
-        </form>
-        <form onSubmit={handleGetEntries} className="formContainer">
-            <button type="submit">Get Entries</button>
-            <br/>
-            <tbody>
-                {entries.map((entry) => (
-                    <tr key={entry.Date}>
-                        <td>{entry.Date}</td>
-                        <td>{entry.Height}</td>
-                        <td>{entry.Weight}</td>
-                        <td>{entry.FatPercentage}</td>
-                        <td>{entry.MusclePercentage}</td>
-                        <td>{entry.WaterPercentage}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </form>
-    </>;
+            <form onSubmit={handleDelete} className="form-container">
+                <h2>Delete Entry</h2>
+                <select onChange={handleIDChange}>
+                    {entries.map(i => <option value={i.id}>{i.dateStamp.toLocaleString()}</option>)}
+                </select>
+                <button type="submit">Delete Item</button>
+            </form>
+    </>
+  );
 }
 
 export default Health;
+
+
+

@@ -25,9 +25,8 @@ export interface IInventoryService {
 }
 
 export class InventoryService implements IInventoryService {
-    private baseUrl = "/api";
     async GetAllForUser(): Promise<Inventory[]> {
-        return await fetch(`${this.baseUrl}/inventories`,
+        return await fetch(`/api/inventories`,
             {
                 headers: JwtService.getDefaultHeader()
             })
@@ -37,7 +36,7 @@ export class InventoryService implements IInventoryService {
     async Post(userId: number, name: string): Promise<Response> {
         const headers = JwtService.getDefaultHeader();
         headers.append('content-type', 'application/json');
-        return await fetch(`${this.baseUrl}/inventories`,
+        return await fetch(`/api/inventories`,
             {
                 method: "POST",
                 body: JSON.stringify({ "userId": userId, "name": name}),
@@ -48,7 +47,7 @@ export class InventoryService implements IInventoryService {
     async PostToInv(invId: number, foodId: number, expirationDate: string): Promise<Response> {
         const headers = JwtService.getDefaultHeader();
         headers.append('content-type', 'application/json');
-        return await fetch(`${this.baseUrl}/inventories/${invId}`,
+        return await fetch(`/api/inventories/${invId}`,
         {
             method: "POST",
             body: JSON.stringify({ "foodId": foodId, "expirationDate": expirationDate}),
@@ -59,7 +58,7 @@ export class InventoryService implements IInventoryService {
     async DeleteItem(invId: number, itemId: number): Promise<Response> {
         const headers = JwtService.getDefaultHeader();
         headers.append('content-type', 'application/json');
-        return await fetch(`${this.baseUrl}/inventories/${invId}/${itemId}`,
+        return await fetch(`/api/inventories/${invId}/${itemId}`,
         { 
             method: "Delete",
             headers: headers
@@ -70,7 +69,7 @@ export class InventoryService implements IInventoryService {
         const headers = JwtService.getDefaultHeader();
         headers.append('content-type', 'application/json');
 
-        return await fetch(`${this.baseUrl}/inventories/${inv.id}`,
+        return await fetch(`/api/inventories/${inv.id}`,
         {
             method: "DELETE",
             headers: headers,
