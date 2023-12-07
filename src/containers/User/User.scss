@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
-    gap: 10px;
+    gap: 5px;
 }
 
 .login-form > div > input {
@@ -17,10 +17,10 @@
 }
 
 form a {
-    color: darkblue;
-    text-decoration: underline;
+    color: rgb(77, 136, 0);
     cursor: pointer;
 }
+  
 
 form span {
     margin-top: 20px;
@@ -41,4 +41,16 @@ form {
 .hidden {
     position: absolute;
     display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield !important;
+  appearance: textfield;
 }

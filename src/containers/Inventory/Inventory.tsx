@@ -153,7 +153,7 @@ function InventoryPage() {
             <div className='date-row'>
               <button className='day-btn' type='button' onClick={() => addDays(-1)}>-</button>
               <div className='day-div'>
-                <span style={{ fontSize: "1.1rem" }}>{days}</span>
+                <span style={{ fontSize: "1.1rem", marginTop: "5px" }}>{days}</span>
                 <span style={{ fontSize: "0.9rem", marginTop: "-9px", width: "40px" }}>
                   {Math.abs(days) == 1 ? "Day" : "Days"}
                 </span>
@@ -196,7 +196,7 @@ function Inventories(props: InventoriesProps) {
     }
   }
   const deleteInv = async () => {
-    if (!confirm("Delete inventory?")) return;
+    if (!confirm("Delete inventory and all items?")) return;
     if (context.user == null) return;
     const res = await inventoryService.DeleteInv(inv);
     if (res.ok) {
@@ -249,7 +249,7 @@ function Inventories(props: InventoriesProps) {
                 <div key={item.id} className='delete-btn-container item'>
 
                   {daysToExpiration < 0 &&
-                    <p style={{ color: "darkgrey" }}>
+                    <p style={{ color: "#707070" }}>
                       {item.food?.name} (expired {Math.abs(daysToExpiration)} {daysToExpiration == -1 ? "day" : "days"} ago)
                     </p>}
 
@@ -303,7 +303,7 @@ function NewInventory(props: NewInventoryProps) {
     <>
       <h2>New inventory</h2>
       <form onSubmit={handleSubmit} className='form-container' style={{ marginTop: "20px" }}>
-        <input type='text' placeholder='Name' minLength={1} onChange={e => setName(e.target.value)}></input>
+        <input type='text' placeholder='Name' minLength={1} onChange={e => setName(e.target.value)} required></input>
         <button type='submit'>Ok</button>
       </form>
     </>
