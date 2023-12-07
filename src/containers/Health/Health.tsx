@@ -13,6 +13,7 @@ type Health = {
     musclePercentage: number;
     waterPercentage: number;
 };
+
 type HealthEntry = {
     id: number;
     userID: number;
@@ -44,7 +45,6 @@ const Health = () => {
         handleGetEntries();
         const { value } = event.target;
         setLabel(value);
-        console.log(value);
     }
     
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -64,26 +64,17 @@ const Health = () => {
         event.preventDefault();
         formData.dateStamp = new Date();
         const res = await healthService.PostHealth(formData).then((data => data));
-        console.log(res);
-
-        // insert post request here
     };
 
     // this needs id from a given entry instead of from an input field
     const handleDelete = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("Deleting entry with id: " + id);
-        
         const res = await healthService.DeleteHealth(id).then((data => data));
-        console.log(res);
     };
 
     const handleGetEntries = async () => {
         const res = await healthService.GetHealth().then((data => data));
-        
-        console.log(res)
         setTimeout(async () => {
-            // res.forEach(i => entries.push(i));
             setEntries(res);
         });
     };
@@ -191,8 +182,6 @@ const Health = () => {
                 </select>
                 <button type="submit">Delete Item</button>
             </form>
-        
-    
     </>
   );
 }
