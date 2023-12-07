@@ -37,7 +37,6 @@ interface IUserService {
 }
 
 export class UserService implements IUserService {
-    // private baseUrl = "localhost"
     SignOut(): void {
         JwtService.ClearJwt();
     }

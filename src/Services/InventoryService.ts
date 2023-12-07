@@ -25,7 +25,6 @@ export interface IInventoryService {
 }
 
 export class InventoryService implements IInventoryService {
-    // private baseUrl = "http://127.0.0.1";
     async GetAllForUser(): Promise<Inventory[]> {
         return await fetch(`/api/inventories`,
             {

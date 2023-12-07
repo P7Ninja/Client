@@ -28,31 +28,35 @@ export interface IHealthService {
 
 
 export class HealthService implements IHealthService {
-    private headers = JwtService.getDefaultHeader();
     
     async GetHealth(): Promise<HealthEntry[]> {
+        const headers = JwtService.getDefaultHeader();
         return await fetch(`/api/health/history`,
         {
             method: "GET",
-            headers: this.headers
+            headers: headers
         }
         ).then(res => res.json());
     }
 
     async PostHealth(health: Health): Promise<Health> {
+        const headers = JwtService.getDefaultHeader();
+        headers.append('content-type', 'application/json');
         return await fetch(`/api/health`,
             {
                 method: "POST", body: JSON.stringify(health),
-                headers: this.headers
+                headers: headers
             })
             .then(res => res.json());
     }
 
     async DeleteHealth(id: number): Promise<void> {
+        const headers = JwtService.getDefaultHeader();
+        headers.append('content-type', 'application/json');
         await fetch(`/api/health/` + id, 
         { 
             method: "DELETE",
-            headers: this.headers 
+            headers: headers 
         });
     }
 }

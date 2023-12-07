@@ -77,21 +77,6 @@ h1 {
     background-color: #00000025;
 }
 
-.form-container {
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 12px;
-    background-color: #00000005;
-    border: 1px solid #00000010;
-    padding: 16px;
-    box-shadow: 0 5px 10px #0001;
-}
-.form-container :is(input, select, button) {
-    font-size: 1rem;
-}
-
 .date-row {
     display: flex;
     gap: 15px;

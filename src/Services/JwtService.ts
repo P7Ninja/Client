@@ -6,8 +6,7 @@ export abstract class JwtService {
         localStorage.setItem("jwt", jwt);
     }
     static getDefaultHeader() {
-        return new Headers({'Authorization': `Bearer ${this.GetJwt()}`,
-                            'Content-Type': 'application/json'})
+        return new Headers({'Authorization': `Bearer ${this.GetJwt()}`})
     }
     static ClearJwt() {
         localStorage.removeItem("jwt");
