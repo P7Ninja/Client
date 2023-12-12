@@ -28,15 +28,19 @@ export interface IHealthService {
 
 
 export class HealthService implements IHealthService {
-    
     async GetHealth(): Promise<HealthEntry[]> {
-        const headers = JwtService.getDefaultHeader();
-        return await fetch(`/api/health/history`,
-        {
-            method: "GET",
-            headers: headers
+        try {
+            const response = await fetch('/api/health/history', { 
+                method: 'GET',
+                headers: JwtService.getDefaultHeader(),
+        });
+        const data = await response.json();
+        return data;
+
+        } catch(error) {
+            console.error('Error fetching health:', error);
+            throw error;
         }
-        ).then(res => res.json());
     }
 
     async PostHealth(health: Health): Promise<Health> {
