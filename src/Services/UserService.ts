@@ -44,7 +44,7 @@ export class UserService implements IUserService {
         const targets: Targets = { calories: form.calories, protein: form.protein, fat: form.fat, carbohydrates: form.carbs }
         const createUserForm: CreateUserForm = { username: form.username, email: form.email, password: form.password, birthday: form.birthdate, city: form.city, gender: form.gender, target_energy: targets, useFoodWasteDiscounts: form.useFoodWasteDiscounts }
 
-        return await fetch(`/user`,
+        return await fetch(`/api/user`,
             {
                 method: "POST",
                 body: JSON.stringify(createUserForm),
